@@ -25,8 +25,8 @@
       },
     })
       .add(() => GK.marcarListo(), 0.15)
-      .to(g, { opacity: 0, scale: 0.94, duration: 0.3, ease: 'power2.in' }, 0)
-      .to(cortina, { yPercent: -100, duration: 0.55, ease: 'expo.inOut' }, 0.05);
+      .to(g, { opacity: 0, scale: 0.94, duration: 0.25, ease: 'power2.in' }, 0)
+      .to(cortina, { yPercent: -100, duration: 0.48, ease: 'expo.inOut' }, 0.02);
   }
 
   // Destello que recorre el metal de la G (el degradado cruza en diagonal)
@@ -77,9 +77,9 @@
     gsap.timeline({ onComplete: () => { window.location.href = limpiar(url); } })
       .set(cortina, { visibility: 'visible', yPercent: 100 })
       .set(g, { opacity: 0, scale: 0.9 })
-      .to(cortina, { yPercent: 0, duration: 0.42, ease: 'expo.inOut' })
-      .to(g, { opacity: 1, scale: 1, duration: 0.22, ease: 'power2.out' }, '-=0.18')
-      .add(destello(0.3), '-=0.12');
+      .to(cortina, { yPercent: 0, duration: 0.38, ease: 'expo.inOut' })
+      .to(g, { opacity: 1, scale: 1, duration: 0.2, ease: 'power2.out' }, '-=0.16')
+      .add(destello(0.26), '-=0.1');
   });
 
   /* ---- Volver con el botón "atrás": la página sale de caché con la cortina puesta ---- */

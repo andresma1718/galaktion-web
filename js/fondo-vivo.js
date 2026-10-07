@@ -286,7 +286,7 @@
           trazar(p, 0, p.total, dy);
           if (prog <= 0) continue;
           const L = p.total * suave(prog);
-          ctx.strokeStyle = 'rgba(220,220,220,' + alfa(0.26 * p.brillo) + ')';
+          ctx.strokeStyle = 'rgba(220,220,220,' + alfa((conMouse ? 0.24 : 0.16) * p.brillo) + ')';
           trazar(p, 0, L, dy);
           // Pad de inicio
           const [x0, y0] = p.pts[0];
@@ -294,7 +294,7 @@
           ctx.beginPath(); ctx.arc(x0, y0 - dy, 2.5, 0, Math.PI * 2); ctx.stroke();
           if (prog < 1) {
             const [hx, hy] = puntoEn(p, L); // cabeza que se va encendiendo
-            destello(hx, hy - dy, 22, 0.75 * p.brillo);
+            destello(hx, hy - dy, conMouse ? 22 : 16, (conMouse ? 0.75 : 0.5) * p.brillo);
           } else {
             const [x1, y1] = p.pts[p.pts.length - 1]; // pad final
             ctx.fillStyle = 'rgba(232,232,232,' + alfa(0.4 * p.brillo) + ')';
@@ -313,7 +313,7 @@
         pulsos = pulsos.filter((pu) => {
           pu.L += pu.vel + extra;
           if (pu.L >= pu.p.total) return false;
-          ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+          ctx.strokeStyle = conMouse ? 'rgba(255,255,255,0.42)' : 'rgba(255,255,255,0.3)';
           ctx.lineWidth = 1.2;
           trazar(pu.p, Math.max(0, pu.L - 40), pu.L, dy);
           ctx.lineWidth = 1;
