@@ -232,7 +232,7 @@
     function generar() {
       const doc = document.documentElement.scrollHeight;
       const altoCapa = Math.max(0, doc - E.alto) * PARALLAX + E.alto;
-      const porPantalla = (E.ancho / (conMouse ? 85 : 70)) * E.calidad;
+      const porPantalla = (E.ancho / (conMouse ? 52 : 48)) * E.calidad;
       const total = Math.round(porPantalla * (altoCapa / E.alto));
       pistas = [];
       pulsos = [];
@@ -307,7 +307,7 @@
         if (!mover) return;
         if (ahora > proximoPulso && completas.length) {
           proximoPulso = ahora + rnd(350, 900);
-          if (pulsos.length < 6) pulsos.push({ p: completas[(Math.random() * completas.length) | 0], L: 0, vel: rnd(1.2, 2.2) });
+          if (pulsos.length < 9) pulsos.push({ p: completas[(Math.random() * completas.length) | 0], L: 0, vel: rnd(1.2, 2.2) });
         }
         const extra = Math.min(6, Math.abs(E.velScroll) * 0.25);
         pulsos = pulsos.filter((pu) => {
@@ -342,9 +342,9 @@
         const cx = W / 2;
         const f = H * 0.45;        // escala de la proyección
         const camara = 1.2;        // altura de la cámara sobre el piso
-        const cerca = 0.5, lejos = 26;
+        const cerca = 0.5, lejos = 13; // sin llegar al horizonte: evita la franja de líneas amontonadas
 
-        if (mover) avance = (avance + 0.004 + Math.abs(E.velScroll) * 0.0009) % 1;
+        if (mover) avance = (avance + 0.003 + Math.abs(E.velScroll) * 0.0007) % 0.5;
 
         // La luz sigue al mouse; en celular deambula sola y reacciona al scroll
         let tx, ty;
@@ -362,13 +362,13 @@
 
         const ruta = new Path2D();
         // Líneas hacia el horizonte
-        const media = Math.ceil(((W / 2) / f) * cerca) + 1;
-        for (let x = -media * 4; x <= media * 4; x++) {
+        const media = Math.ceil(((W / 2) / f) * 0.9) + 1; // cubre el ancho de la pantalla al pie
+        for (let x = -media; x <= media + 0.001; x += 0.25) {
           ruta.moveTo(proyX(x, cerca), proyY(cerca));
           ruta.lineTo(proyX(x, lejos), proyY(lejos));
         }
         // Líneas transversales que avanzan hacia quien mira
-        for (let z = lejos; z > cerca; z--) {
+        for (let z = lejos; z > cerca; z -= 0.5) {
           const zz = z - avance;
           if (zz <= cerca) continue;
           const y = proyY(zz);
@@ -424,7 +424,7 @@
     }
     function puntoDeG() {
       // 40 % sobre el borde (silueta nítida), 60 % adentro (relleno)
-      if (Math.random() < 0.4) {
+      if (Math.random() < 0.55) {
         const i = (Math.random() * G.length) | 0, j = (i + 1) % G.length, t = Math.random();
         return [G[i][0] + (G[j][0] - G[i][0]) * t, G[i][1] + (G[j][1] - G[i][1]) * t];
       }
@@ -476,8 +476,8 @@
           const f = suave(limitar((forma - p.retraso) / (1 - p.retraso), 0, 1));
           const x = p.x + (ox + p.gx * esc - p.x) * f;
           const y = p.y + (oy + p.gy * esc - p.y) * f;
-          ctx.fillStyle = 'rgba(232,232,232,' + alfa((0.28 + 0.4 * p.z) * (0.75 + f * 0.5)) + ')';
-          const s = (0.8 + p.z * 1.1) * (1 - f * 0.25);
+          ctx.fillStyle = 'rgba(232,232,232,' + alfa((0.3 + 0.4 * p.z) * (0.8 + f * 0.7)) + ')';
+          const s = (0.9 + p.z * 1.2) * (1 + f * 0.35);
           ctx.fillRect(x - s / 2, y - s / 2, s, s);
         }
       },
@@ -512,7 +512,7 @@
         const respira = E.reducido ? 0.5 : 0.5 + 0.5 * Math.sin(t * (Math.PI * 2) / 6); // ciclo de 6 s
         const base = Math.max(E.ancho, E.alto);
         halo(eco.x, eco.y, base * (0.42 + respira * 0.06), 0.05 + respira * 0.025);
-        halo(luz.x, luz.y, base * (0.26 + respira * 0.07), 0.1 + respira * 0.07);
+        halo(luz.x, luz.y, base * (0.26 + respira * 0.07), 0.13 + respira * 0.08);
       },
     };
   }

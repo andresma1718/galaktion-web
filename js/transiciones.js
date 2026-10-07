@@ -24,10 +24,16 @@
         gsap.set([cortina, g], { clearProps: 'all' });
       },
     })
-      .fromTo(g, { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.92, duration: 0.45, ease: 'power2.in' }, 0.05)
-      .add(() => GK.marcarListo(), 0.3)
-      .to(cortina, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, 0.25);
+      .add(() => GK.marcarListo(), 0.15)
+      .to(g, { opacity: 0, scale: 0.94, duration: 0.3, ease: 'power2.in' }, 0)
+      .to(cortina, { yPercent: -100, duration: 0.55, ease: 'expo.inOut' }, 0.05);
   }
+
+  // Destello que recorre el metal de la G (el degradado cruza en diagonal)
+  const luz = cortina.querySelector('.cortina__luz');
+  const destello = (duracion) => (luz
+    ? gsap.fromTo(luz, { attr: { x1: -320, x2: -160 } }, { attr: { x1: 560, x2: 720 }, duration: duracion, ease: 'power1.inOut' })
+    : gsap.timeline());
   if (html.classList.contains('con-transicion')) retirar();
 
   /* ---- Salida: interceptar clics en enlaces internos ---- */
@@ -67,11 +73,13 @@
     try { sessionStorage.setItem('gk-transicion', '1'); } catch (err) { /* sin problema */ }
     if (GK.lenis) GK.lenis.stop();
 
+    // Salida (~0,45 s) + llegada (~0,55 s) = alrededor de 1 segundo en total
     gsap.timeline({ onComplete: () => { window.location.href = limpiar(url); } })
       .set(cortina, { visibility: 'visible', yPercent: 100 })
       .set(g, { opacity: 0, scale: 0.9 })
-      .to(cortina, { yPercent: 0, duration: 0.8, ease: 'expo.inOut' })
-      .to(g, { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, '-=0.25');
+      .to(cortina, { yPercent: 0, duration: 0.42, ease: 'expo.inOut' })
+      .to(g, { opacity: 1, scale: 1, duration: 0.22, ease: 'power2.out' }, '-=0.18')
+      .add(destello(0.3), '-=0.12');
   });
 
   /* ---- Volver con el botón "atrás": la página sale de caché con la cortina puesta ---- */

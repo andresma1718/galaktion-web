@@ -18,9 +18,13 @@
 
   GK.fuentes.then(() => {
     titularesCineticos();
+    titularesDeSeccion();
     revelarPalabras();
     entradas();
+    lineasDivisorias();
+    parallaxSecciones();
     tarjetas3D();
+    botonesMagneticos();
     mascarasYParallax();
     proceso();
     contadores();
@@ -65,6 +69,25 @@
   }
 
   /* -----------------------------------------------------------------------
+     Títulos de sección: las palabras suben en secuencia al entrar en pantalla
+     ----------------------------------------------------------------------- */
+  function titularesDeSeccion() {
+    if (!hayDivision) return;
+    $$('main .titular--seccion, main .titular--grande').forEach((el) => {
+      if (el.closest('[data-titular-cinetico]') || el.hasAttribute('data-titular-cinetico')) return;
+      const division = new SplitText(el, { type: 'words', wordsClass: 'palabra' });
+      el.classList.add('dividido');
+      gsap.set(division.words, { opacity: 0, yPercent: 70, rotationX: -55, transformPerspective: 600, transformOrigin: '50% 100%' });
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 88%',
+        once: true,
+        onEnter: () => gsap.to(division.words, { opacity: 1, yPercent: 0, rotationX: 0, duration: 1.1, stagger: 0.07, ease: 'expo.out' }),
+      });
+    });
+  }
+
+  /* -----------------------------------------------------------------------
      Revelado palabra por palabra (de gris a blanco) ligado al scroll
      ----------------------------------------------------------------------- */
   function revelarPalabras() {
@@ -97,26 +120,88 @@
       '.contacto__directo',
       '.formulario > *',
     ].join(',');
-    const elementos = $$(SELECTORES).filter((el) => !el.closest('.hero') && !el.closest('.encabezado-pagina') && !el.closest('.contacto__cabeza'));
-    gsap.set(elementos, { opacity: 0, y: 40 });
+    // Los títulos de sección tienen su propia entrada (palabra por palabra)
+    const elementos = $$(SELECTORES).filter((el) => !el.closest('.hero') && !el.closest('.encabezado-pagina') && !el.closest('.contacto__cabeza')
+      && !(hayDivision && el.matches('.titular--seccion, .titular--grande')));
+    // Desvanecido + desplazamiento + escala suave: nada aparece de golpe
+    gsap.set(elementos, { opacity: 0, y: 40, scale: 0.97, transformOrigin: '50% 100%' });
     ScrollTrigger.batch(elementos, {
       start: 'top 90%',
       once: true,
-      onEnter: (lote) => gsap.to(lote, { opacity: 1, y: 0, duration: 1.1, stagger: 0.1, ease: 'expo.out', overwrite: 'auto' }),
+      onEnter: (lote) => gsap.to(lote, { opacity: 1, y: 0, scale: 1, duration: 1.1, stagger: 0.1, ease: 'expo.out', overwrite: 'auto' }),
     });
 
-
     // Tarjetas y pasos: entran escalonados con un leve giro 3D
+    // (sin borrar la perspectiva al final: la usa la inclinación con el mouse)
     const tarjetas = $$('.tarjetas > *, .paso, .cifra');
-    gsap.set(tarjetas, { opacity: 0, y: 70, rotationX: 10, transformPerspective: 900, transformOrigin: '50% 100%' });
+    gsap.set(tarjetas, { opacity: 0, y: 70, scale: 0.96, rotationX: 10, transformPerspective: 900, transformOrigin: '50% 100%' });
     ScrollTrigger.batch(tarjetas, {
       start: 'top 88%',
       once: true,
       onEnter: (lote) => gsap.to(lote, {
-        opacity: 1, y: 0, rotationX: 0,
+        opacity: 1, y: 0, scale: 1, rotationX: 0,
         duration: 1.2, stagger: 0.14, ease: 'expo.out', overwrite: 'auto',
-        clearProps: 'transform',
       }),
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Líneas divisorias plateadas que se dibujan de izquierda a derecha
+     al entrar cada sección
+     ----------------------------------------------------------------------- */
+  function lineasDivisorias() {
+    $$('main .seccion').forEach((seccion) => {
+      if (seccion.matches('.cta, .contacto, .frase-final, .manifiesto')) return;
+      const linea = document.createElement('span');
+      linea.className = 'linea-seccion';
+      linea.setAttribute('aria-hidden', 'true');
+      seccion.prepend(linea);
+      gsap.fromTo(linea, { scaleX: 0 }, {
+        scaleX: 1,
+        duration: 1.6,
+        ease: 'expo.inOut',
+        scrollTrigger: { trigger: seccion, start: 'top 85%', once: true },
+      });
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Parallax sutil en las secciones destacadas
+     ----------------------------------------------------------------------- */
+  function parallaxSecciones() {
+    const capas = [
+      ['.destacado__media', 40],   // proyecto de la cerrajería en el inicio
+      ['.destacado__info', -30],
+      ['.proyecto--principal > .proyecto__media', 30],
+      ['.proyecto__galeria', -20],
+      ['.manifiesto__frase', -25],
+    ];
+    capas.forEach(([sel, desplazamiento]) => {
+      $$(sel).forEach((el) => {
+        gsap.fromTo(el, { y: desplazamiento }, {
+          y: -desplazamiento,
+          ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
+        });
+      });
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Botones magnéticos: se acercan levemente al cursor (solo con mouse)
+     ----------------------------------------------------------------------- */
+  function botonesMagneticos() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    $$('.boton, .whatsapp-flotante').forEach((boton) => {
+      const fuerza = boton.classList.contains('whatsapp-flotante') ? 0.4 : 0.28;
+      const mx = gsap.quickTo(boton, 'x', { duration: 0.5, ease: 'power3' });
+      const my = gsap.quickTo(boton, 'y', { duration: 0.5, ease: 'power3' });
+      boton.addEventListener('pointermove', (e) => {
+        const r = boton.getBoundingClientRect();
+        mx((e.clientX - (r.left + r.width / 2)) * fuerza);
+        my((e.clientY - (r.top + r.height / 2)) * fuerza);
+      });
+      boton.addEventListener('pointerleave', () => { mx(0); my(0); });
     });
   }
 
@@ -125,7 +210,16 @@
      ----------------------------------------------------------------------- */
   function tarjetas3D() {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    // También las imágenes de proyectos (portafolio y proyecto destacado)
+    $$('.destacado__media, .proyecto__media').forEach((el) => el.setAttribute('data-inclinar', ''));
     $$('[data-inclinar]').forEach((tarjeta) => {
+      // Brillo plateado que recorre la tarjeta al pasar el mouse
+      const barrido = document.createElement('span');
+      barrido.className = 'barrido';
+      barrido.setAttribute('aria-hidden', 'true');
+      tarjeta.appendChild(barrido);
+
+      const suave = tarjeta.matches('.proyecto__media, .destacado__media') ? 0.5 : 1; // las imágenes giran menos
       const rx = gsap.quickTo(tarjeta, 'rotationX', { duration: 0.6, ease: 'power3' });
       const ry = gsap.quickTo(tarjeta, 'rotationY', { duration: 0.6, ease: 'power3' });
       gsap.set(tarjeta, { transformPerspective: 1000 });
@@ -133,8 +227,8 @@
         const r = tarjeta.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width;
         const py = (e.clientY - r.top) / r.height;
-        ry((px - 0.5) * 10);
-        rx((0.5 - py) * 8);
+        ry((px - 0.5) * 10 * suave);
+        rx((0.5 - py) * 8 * suave);
         tarjeta.style.setProperty('--mx', px * 100 + '%');
         tarjeta.style.setProperty('--my', py * 100 + '%');
       });
