@@ -9,7 +9,7 @@ Todo está en **`js/config.js`**:
 | Qué | Dónde en `config.js` |
 |---|---|
 | Número de WhatsApp | `contacto.whatsapp` (solo dígitos, con 57) y `contacto.whatsappVisible` |
-| Correo (hoy galaktionai@gmail.com) e Instagram | `contacto.correo`, `contacto.instagram` (sin @) |
+| Correo (hoy galaktionai1@gmail.com) e Instagram | `contacto.correo`, `contacto.instagram` (sin @) |
 | Mensajes que se envían por WhatsApp | `mensajes` |
 | Titular, subtítulo, manifiesto, llamado final | `inicio` |
 | Contadores (100 %, 7–15 días…) | `cifras` |

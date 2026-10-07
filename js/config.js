@@ -21,7 +21,7 @@ window.GALAKTION = {
     whatsapp: '573000000000',
     // Cómo se ve el número escrito en la página
     whatsappVisible: '+57 300 000 0000',
-    correo: 'galaktionai@gmail.com',
+    correo: 'galaktionai1@gmail.com',
     // Usuario de Instagram SIN la @
     instagram: 'galaktion',
     dominio: 'galaktionai.com',
