@@ -1,0 +1,55 @@
+/* =========================================================================
+   GALAKTION — VARIABLES DE DISEÑO
+   Paleta monocromática (solo estos 7 colores), tipografías y medidas.
+   ========================================================================= */
+
+:root {
+  /* ---- Paleta ---- */
+  --negro: #0a0a0a;            /* fondo base */
+  --carbon: #141414;           /* tarjetas y secciones alternas */
+  --grafito: #2a2a2a;          /* bordes y líneas */
+  --gris: #8a8a8a;             /* textos secundarios */
+  --plata: #c0c0c0;            /* acentos, íconos, detalles */
+  --plata-brillante: #e8e8e8;  /* titulares y destellos */
+  --blanco: #ffffff;           /* solo para lo más importante */
+
+  /* ---- Metal (degradados de acero cepillado) ---- */
+  --metal: linear-gradient(135deg, #f5f5f5 0%, #c0c0c0 22%, #8a8a8a 40%, #e8e8e8 55%, #f5f5f5 64%, #a5a5a5 80%, #8a8a8a 92%, #c0c0c0 100%);
+  --metal-texto: linear-gradient(180deg, #ffffff 0%, #e8e8e8 42%, #a8a8a8 78%, #c0c0c0 100%);
+  --metal-boton: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 38%, #b5b5b5 52%, #c0c0c0 70%, #e8e8e8 100%);
+
+  /* ---- Tipografías ---- */
+  --fuente-titular: 'Michroma', 'Eurostile', 'Arial Black', sans-serif;
+  --fuente-texto: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* ---- Tamaños de texto (fluidos, de celular a escritorio) ---- */
+  --texto-xs: 0.72rem;
+  --texto-s: 0.875rem;
+  --texto-m: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --texto-l: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --titular-seccion: clamp(1.35rem, 0.9rem + 2.2vw, 2.6rem);
+  --titular-pagina: clamp(1.7rem, 0.9rem + 4vw, 4.4rem);
+  --titular-grande: clamp(1.5rem, 0.8rem + 3.4vw, 3.8rem);
+  --titular-hero: clamp(1.25rem, 0.75rem + 2.6vw, 3rem);
+
+  /* ---- Espaciado y medidas ---- */
+  --margen: clamp(16px, 5vw, 64px);
+  --ancho-max: 1320px;
+  --seccion: clamp(96px, 10vw + 48px, 200px);
+  --cabecera: 72px;
+  --radio: 2px;
+
+  /* ---- Movimiento ---- */
+  --ease-salida: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-suave: cubic-bezier(0.65, 0, 0.35, 1);
+  --rapido: 0.3s;
+  --medio: 0.6s;
+
+  /* ---- Capas ---- */
+  --z-cabecera: 50;
+  --z-menu: 60;
+  --z-whatsapp: 70;
+  --z-cortina: 90;
+  --z-cargador: 100;
+  --z-cursor: 110;
+}

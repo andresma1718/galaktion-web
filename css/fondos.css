@@ -1,0 +1,85 @@
+/* =========================================================================
+   GALAKTION — FONDOS (todo hecho con código, sin fotos)
+   A: concreto oscuro con luz cenital (inicio y encabezados)
+   B: negro casi liso con grano fino (contenido)
+   C: negro con destello plateado en una esquina (contacto y llamados)
+   Todos parten y terminan en el mismo negro para fundirse sin cortes.
+   ========================================================================= */
+
+/* ---- Grano fino global, apenas perceptible (una sola capa fija) ---- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 220px;
+}
+
+/* =========================================================================
+   FONDO A — superficie de concreto / estuco con relieve
+   ========================================================================= */
+.fondo-a {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--negro);
+}
+/* Textura: ruido + iluminación difusa = relieve de pared */
+.fondo-a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='6' seed='11' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' surfaceScale='3.2' diffuseConstant='1' lighting-color='%23fff' result='l'%3E%3CfeDistantLight azimuth='235' elevation='38'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='.24' intercept='-.045'/%3E%3CfeFuncG type='linear' slope='.24' intercept='-.045'/%3E%3CfeFuncB type='linear' slope='.24' intercept='-.045'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E");
+  background-size: 640px;
+  opacity: 0.9;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+/* Luz cenital sobre el centro + viñeteado en los bordes + fundido inferior */
+.fondo-a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 46% 40% at 50% 40%, rgba(255, 255, 255, 0.11) 0%, rgba(232, 232, 232, 0.035) 45%, transparent 72%),
+    radial-gradient(ellipse 110% 85% at 50% 42%, transparent 30%, rgba(10, 10, 10, 0.78) 78%, var(--negro) 100%),
+    linear-gradient(to bottom, transparent 70%, var(--negro) 100%);
+}
+
+/* =========================================================================
+   FONDO B — negro profundo casi liso (el grano viene de la capa global)
+   ========================================================================= */
+.fondo-b {
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 255, 255, 0.018), transparent 70%),
+    linear-gradient(180deg, var(--negro) 0%, #0d0d0d 50%, var(--negro) 100%);
+}
+
+/* =========================================================================
+   FONDO C — reflejo plateado difuminado en una esquina, como sobre metal
+   ========================================================================= */
+.fondo-c {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--negro);
+  overflow: hidden;
+}
+.fondo-c::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, var(--negro) 0%, transparent 22%),
+    radial-gradient(ellipse 48% 58% at 92% 18%, rgba(232, 232, 232, 0.15) 0%, rgba(192, 192, 192, 0.05) 38%, transparent 70%),
+    linear-gradient(122deg, transparent 50%, rgba(255, 255, 255, 0.04) 58%, transparent 64%, transparent 68%, rgba(255, 255, 255, 0.025) 72%, transparent 78%),
+    radial-gradient(ellipse 60% 45% at 0% 100%, rgba(192, 192, 192, 0.04), transparent 70%);
+}

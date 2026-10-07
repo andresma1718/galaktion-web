@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /referencias/
+
+Sitemap: https://galaktionai.com/sitemap.xml

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Servicios — GALAKTION | Diseño web premium, Meta Ads e IA</title>
+  <meta name="description" content="Diseño web premium con animaciones, publicidad en Facebook e Instagram y automatización con inteligencia artificial para negocios en Colombia.">
+  <link rel="canonical" href="https://galaktionai.com/servicios">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph: así se ve el enlace al compartirlo por WhatsApp, Facebook, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="GALAKTION">
+  <meta property="og:title" content="Servicios — GALAKTION | Diseño web premium, Meta Ads e IA">
+  <meta property="og:description" content="Diseño web premium con animaciones, publicidad en Facebook e Instagram y automatización con inteligencia artificial para negocios en Colombia.">
+  <meta property="og:url" content="https://galaktionai.com/servicios">
+  <meta property="og:image" content="https://galaktionai.com/assets/og-galaktion.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GALAKTION — agencia digital premium">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Estado inicial antes de pintar: evita parpadeos del cargador y la cortina -->
+  <script>
+    (function (d) {
+      var h = d.documentElement; h.className += ' js';
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { h.className += ' movimiento-reducido'; return; }
+      try {
+        if (!sessionStorage.getItem('gk-visitado')) h.className += ' primera-visita';
+        else if (sessionStorage.getItem('gk-transicion')) h.className += ' con-transicion';
+      } catch (e) {}
+      // Seguro: si las animaciones no arrancan en 6 s (sin internet, etc.), se muestra todo
+      setTimeout(function () {
+        if (!/animaciones-listas/.test(h.className)) h.className = h.className.replace(/primera-visita|con-transicion/g, '') + ' sin-animacion';
+      }, 6000);
+    })(document);
+  </script>
+
+  <!-- Tipografías: Michroma (titulares) + Manrope (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Michroma&display=swap">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/fondos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/paginas.css">
+
+</head>
+<body class="pagina-servicios" data-pagina="servicios">
+
+  <!-- ===== Sprite SVG: G, logotipos, degradados metálicos y filtros ===== -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Acero plateado: de #f5f5f5 a #8a8a8a y de vuelta -->
+      <linearGradient id="gk-metal" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#f5f5f5"/>
+        <stop offset=".2" stop-color="#d2d2d2"/>
+        <stop offset=".36" stop-color="#8a8a8a"/>
+        <stop offset=".5" stop-color="#e8e8e8"/>
+        <stop offset=".6" stop-color="#f5f5f5"/>
+        <stop offset=".74" stop-color="#a4a4a4"/>
+        <stop offset=".88" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#d6d6d6"/>
+      </linearGradient>
+      <!-- Borde de bisel: luz arriba-izquierda, sombra abajo-derecha -->
+      <linearGradient id="gk-bisel" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".55" stop-color="#e8e8e8"/>
+        <stop offset="1" stop-color="#8a8a8a"/>
+      </linearGradient>
+      <!-- Metal para textos (vertical) -->
+      <linearGradient id="gk-metal-texto" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".45" stop-color="#e8e8e8"/>
+        <stop offset=".75" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#c0c0c0"/>
+      </linearGradient>
+      <!-- Destello de luz que recorre el metal -->
+      <linearGradient id="gk-destello" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <!-- Relieve (bisel con luz especular) + vetas de acero cepillado -->
+      <filter id="gk-relieve" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="desenfoque"/>
+        <feSpecularLighting in="desenfoque" surfaceScale="5" specularConstant=".85" specularExponent="24" lighting-color="#ffffff" result="luz">
+          <feDistantLight azimuth="225" elevation="42"/>
+        </feSpecularLighting>
+        <feComposite in="luz" in2="SourceAlpha" operator="in" result="luzDentro"/>
+        <feComposite in="SourceGraphic" in2="luzDentro" operator="arithmetic" k1="0" k2="1" k3=".6" k4="0" result="conLuz"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.42" numOctaves="2" seed="7" result="ruido"/>
+        <feColorMatrix in="ruido" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 .22" result="vetas"/>
+        <feComposite in="vetas" in2="SourceAlpha" operator="in" result="vetasDentro"/>
+        <feBlend in="vetasDentro" in2="conLuz" mode="soft-light"/>
+      </filter>
+    </defs>
+
+    <!-- G completa (una sola pieza) -->
+    <symbol id="gk-g" viewBox="-4 -4 428 568">
+      <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="4" stroke-linejoin="miter"/>
+    </symbol>
+
+    <!-- Logotipo horizontal (menú): G + GALAKTION -->
+    <symbol id="gk-logotipo-horizontal" viewBox="0 0 916 142">
+      <g transform="translate(1 1) scale(.25)">
+        <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="8" stroke-linejoin="miter"/>
+      </g>
+      <text class="logotipo__texto" x="152" y="92" font-size="60" textLength="760" lengthAdjust="spacing" fill="url(#gk-metal-texto)">GALAKTION</text>
+    </symbol>
+
+    <!-- Logotipo vertical (pie de página): G arriba, GALAKTION debajo, como la referencia -->
+    <symbol id="gk-logotipo-vertical" viewBox="0 -4 1560 712">
+      <g transform="translate(570 0)">
+        <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="4" stroke-linejoin="miter"/>
+      </g>
+      <text class="logotipo__texto" x="4" y="702" font-size="92" textLength="1550" lengthAdjust="spacing" fill="url(#gk-metal-texto)">GALAKTION</text>
+    </symbol>
+  </svg>
+
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===== Pantalla de carga (solo en la primera visita de la sesión) ===== -->
+  <div class="cargador" id="cargador" aria-hidden="true">
+    <svg class="cargador__g" viewBox="-4 -4 428 568">
+      <polygon class="cargador__trazo" points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" pathLength="1"/>
+      <polygon class="cargador__relleno" points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)"/>
+    </svg>
+    <div class="cargador__pie">
+      <span class="cargador__marca">GALAKTION</span>
+      <span class="cargador__contador"><span class="cargador__numero">0</span><span class="cargador__por">%</span></span>
+    </div>
+    <span class="cargador__barra"></span>
+  </div>
+
+  <!-- ===== Cortina de transición entre páginas ===== -->
+  <div class="cortina" id="cortina" aria-hidden="true">
+    <svg class="cortina__g"><use href="#gk-g"/></svg>
+  </div>
+
+  <!-- ===== Cursor personalizado (solo escritorio) ===== -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__aro"></span></div>
+  <div class="cursor-punto" aria-hidden="true"></div>
+
+  <!-- ===================== MENÚ SUPERIOR ===================== -->
+  <header class="cabecera" id="cabecera">
+    <a class="cabecera__logo" href="index.html" aria-label="Galaktion, ir al inicio">
+      <svg class="logotipo logotipo--horizontal" role="img" aria-hidden="true"><use href="#gk-logotipo-horizontal"/></svg>
+    </a>
+
+    <nav class="cabecera__nav" aria-label="Principal">
+      <ul>
+        <li><a class="cabecera__enlace" href="index.html">Inicio</a></li>
+        <li><a class="cabecera__enlace" href="servicios.html" aria-current="page">Servicios</a></li>
+        <li><a class="cabecera__enlace" href="portafolio.html">Portafolio</a></li>
+        <li><a class="cabecera__enlace" href="nosotros.html">Nosotros</a></li>
+        <li><a class="cabecera__enlace" href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <a class="boton boton--contorno boton--chico cabecera__cta" href="contacto.html">Hablemos</a>
+
+    <button class="cabecera__hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Menú de pantalla completa para celular -->
+  <div class="menu-movil fondo-c" id="menu-movil" aria-hidden="true">
+    <nav class="menu-movil__nav" aria-label="Menú móvil">
+      <ul class="menu-movil__lista">
+        <li><span class="mascara"><a class="menu-movil__enlace" href="index.html"><span class="menu-movil__texto">Inicio</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="servicios.html" aria-current="page"><span class="menu-movil__texto">Servicios</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="portafolio.html"><span class="menu-movil__texto">Portafolio</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="nosotros.html"><span class="menu-movil__texto">Nosotros</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="contacto.html"><span class="menu-movil__texto">Contacto</span></a></span></li>
+      </ul>
+    </nav>
+    <div class="menu-movil__pie">
+      <a href="https://wa.me/573000000000" data-enlace="whatsapp">WhatsApp</a>
+      <a href="mailto:galaktionai@gmail.com" data-enlace="correo">Correo</a>
+      <a href="https://instagram.com/galaktion" data-enlace="instagram">Instagram</a>
+    </div>
+  </div>
+
+  <main id="contenido">
+
+    <!-- =========================================================
+         ENCABEZADO — titular cinético (letras que entran y se acomodan)
+         ========================================================= -->
+    <section class="encabezado-pagina fondo-a" aria-labelledby="titulo-pagina">
+      <div class="contenedor">
+        <p class="etiqueta">Servicios</p>
+        <h1 class="titular titular--pagina" id="titulo-pagina" data-titular-cinetico>Diseño. Publicidad. Inteligencia.</h1>
+        <p class="encabezado-pagina__intro">Tres formas de hacer crecer tu negocio en digital, con el mismo estándar: precisión, velocidad y resultados.</p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SERVICIOS — scroll horizontal fijado en escritorio,
+         lista vertical en celular (PASO 4)
+         ========================================================= -->
+    <section class="servicios-horizontal fondo-b" aria-label="Detalle de servicios">
+      <div class="servicios-horizontal__pista">
+
+        <!-- 1. Diseño web premium -->
+        <article class="servicio-panel" id="diseno-web" aria-labelledby="titulo-web">
+          <span class="servicio-panel__numero" aria-hidden="true">01</span>
+          <div class="servicio-panel__cabeza">
+            <h2 class="titular titular--seccion" id="titulo-web">Diseño web premium</h2>
+            <p class="servicio-panel__descripcion">Landing pages y sitios completos con animaciones y scroll interactivo, optimizados para celular y construidos para vender. Tu marca, a la altura de las mejores del mundo.</p>
+          </div>
+          <div class="servicio-panel__columnas">
+            <div>
+              <h3 class="servicio-panel__subtitulo">Qué incluye</h3>
+              <ul class="lista-check">
+                <li>Diseño 100% a la medida, sin plantillas</li>
+                <li>Animaciones e interacciones al hacer scroll</li>
+                <li>Optimización para celular, tablet y escritorio</li>
+                <li>Botones de WhatsApp y llamados a la acción</li>
+                <li>Velocidad de carga y SEO básico</li>
+                <li>Publicación en tu dominio</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="servicio-panel__subtitulo">Para quién es</h3>
+              <p class="servicio-panel__texto">Marcas, negocios locales y emprendedores que quieren dejar de verse como uno más y que su web genere confianza y ventas desde el primer segundo.</p>
+            </div>
+          </div>
+          <a class="boton boton--primario" href="https://wa.me/573000000000" data-enlace="whatsapp" data-mensaje="cotizarWeb"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> Cotizar por WhatsApp</a>
+        </article>
+
+        <!-- 2. Publicidad en Meta Ads -->
+        <article class="servicio-panel" id="meta-ads" aria-labelledby="titulo-ads">
+          <span class="servicio-panel__numero" aria-hidden="true">02</span>
+          <div class="servicio-panel__cabeza">
+            <h2 class="titular titular--seccion" id="titulo-ads">Publicidad en Meta Ads</h2>
+            <p class="servicio-panel__descripcion">Campañas en Facebook e Instagram que ponen tu marca frente a las personas correctas, con creativos que detienen el scroll y una optimización basada en datos.</p>
+          </div>
+          <div class="servicio-panel__columnas">
+            <div>
+              <h3 class="servicio-panel__subtitulo">Qué incluye</h3>
+              <ul class="lista-check">
+                <li>Estrategia y estructura de campañas</li>
+                <li>Creativos y textos para anuncios</li>
+                <li>Segmentación de público</li>
+                <li>Configuración de píxel y eventos</li>
+                <li>Optimización y escalado continuo</li>
+                <li>Reportes claros de resultados</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="servicio-panel__subtitulo">Para quién es</h3>
+              <p class="servicio-panel__texto">Negocios que ya tienen un producto o servicio que funciona y quieren más clientes de forma predecible, sin quemar presupuesto en pruebas a ciegas.</p>
+            </div>
+          </div>
+          <a class="boton boton--primario" href="https://wa.me/573000000000" data-enlace="whatsapp" data-mensaje="cotizarAds"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> Cotizar por WhatsApp</a>
+        </article>
+
+        <!-- 3. Automatización con IA (Próximamente) -->
+        <article class="servicio-panel servicio-panel--proximamente" id="automatizacion-ia" aria-labelledby="titulo-ia">
+          <span class="servicio-panel__numero" aria-hidden="true">03</span>
+          <div class="servicio-panel__cabeza">
+            <span class="insignia">Próximamente</span>
+            <h2 class="titular titular--seccion" id="titulo-ia">Automatización con IA</h2>
+            <p class="servicio-panel__descripcion">Inteligencia artificial trabajando para tu negocio las 24 horas: atiende, agenda y vende mientras tú te enfocas en crecer.</p>
+          </div>
+          <div class="servicio-panel__columnas">
+            <div>
+              <h3 class="servicio-panel__subtitulo">Qué incluye</h3>
+              <ul class="lista-check">
+                <li>Chatbots de WhatsApp que atienden y cierran ventas</li>
+                <li>Agendamiento automático de citas</li>
+                <li>Asistentes de voz</li>
+                <li>Automatización de procesos repetitivos</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="servicio-panel__subtitulo">Para quién es</h3>
+              <p class="servicio-panel__texto">Empresas que reciben muchos mensajes, pierden ventas por responder tarde o dedican horas a tareas que una máquina puede hacer mejor.</p>
+            </div>
+          </div>
+          <a class="boton boton--contorno" href="https://wa.me/573000000000" data-enlace="whatsapp" data-mensaje="cotizarIA"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> Quiero saber más</a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PAQUETES — precios editables en js/config.js → paquetes
+         ========================================================= -->
+    <section class="paquetes fondo-b seccion" aria-labelledby="titulo-paquetes">
+      <div class="contenedor">
+        <header class="encabezado-seccion">
+          <p class="etiqueta">Paquetes</p>
+          <h2 class="titular titular--seccion" id="titulo-paquetes">Elige cómo empezar</h2>
+        </header>
+
+        <div class="tarjetas tarjetas--paquetes">
+          <article class="paquete" data-inclinar>
+            <h3 class="paquete__nombre" data-texto="paquetes.esencial.nombre">Esencial</h3>
+            <p class="paquete__precio"><span class="paquete__desde">Desde</span> <span data-texto="paquetes.esencial.precio">$X</span></p>
+            <p class="paquete__descripcion" data-texto="paquetes.esencial.descripcion">Una landing page premium para vender un producto o servicio.</p>
+            <ul class="lista-check">
+              <li>Landing page de una sección larga</li>
+              <li>Animaciones de entrada y scroll</li>
+              <li>Botón de WhatsApp y formulario</li>
+              <li>Optimizada para celular</li>
+            </ul>
+            <a class="boton boton--contorno" href="https://wa.me/573000000000" data-enlace="whatsapp" data-mensaje="paqueteEsencial">Cotizar</a>
+          </article>
+
+          <article class="paquete paquete--destacado" data-inclinar>
+            <span class="insignia">Más elegido</span>
+            <h3 class="paquete__nombre" data-texto="paquetes.profesional.nombre">Profesional</h3>
+            <p class="paquete__precio"><span class="paquete__desde">Desde</span> <span data-texto="paquetes.profesional.precio">$X</span></p>
+            <p class="paquete__descripcion" data-texto="paquetes.profesional.descripcion">Sitio completo de varias páginas con animaciones a la medida.</p>
+            <ul class="lista-check">
+              <li>Hasta 5 páginas</li>
+              <li>Animaciones avanzadas e interactividad</li>
+              <li>Transiciones entre páginas</li>
+              <li>SEO básico y publicación en tu dominio</li>
+            </ul>
+            <a class="boton boton--primario" href="https://wa.me/573000000000" data-enlace="whatsapp" data-mensaje="paqueteProfesional">Cotizar</a>
+          </article>
+
+          <article class="paquete" data-inclinar>
+            <h3 class="paquete__nombre" data-texto="paquetes.premium.nombre">Premium</h3>
+            <p class="paquete__precio"><span class="paquete__desde">Desde</span> <span data-texto="paquetes.premium.precio">$X</span></p>
+            <p class="paquete__descripcion" data-texto="paquetes.premium.descripcion">Sitio de alto nivel + campaña de Meta Ads lista para vender.</p>
+            <ul class="lista-check">
+              <li>Todo lo del paquete Profesional</li>
+              <li>Experiencia interactiva insignia</li>
+              <li>Campaña de Meta Ads con creativos</li>
+              <li>Acompañamiento el primer mes</li>
+            </ul>
+            <a class="boton boton--contorno" href="https://wa.me/573000000000" data-enlace="whatsapp" data-mensaje="paquetePremium">Cotizar</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         LLAMADO A LA ACCIÓN — Fondo C
+         ========================================================= -->
+    <section class="cta fondo-c seccion" aria-labelledby="titulo-cta">
+      <div class="contenedor cta__contenedor">
+        <h2 class="titular titular--grande" id="titulo-cta">¿No sabes cuál elegir?</h2>
+        <p class="cta__texto">Escríbenos y te recomendamos la opción que tiene sentido para tu negocio. Sin compromiso.</p>
+        <a class="boton boton--primario boton--grande" href="https://wa.me/573000000000" data-enlace="whatsapp"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> Hablemos por WhatsApp</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="pie">
+    <div class="pie__contenedor contenedor">
+      <div class="pie__marca">
+        <a class="pie__logo" href="index.html" aria-label="Galaktion, ir al inicio">
+          <svg class="logotipo logotipo--vertical" aria-hidden="true"><use href="#gk-logotipo-vertical"/></svg>
+        </a>
+        <p class="pie__lema">Sitios web premium y publicidad que convierte. Hecho en Colombia.</p>
+      </div>
+
+      <nav class="pie__nav" aria-label="Pie de página">
+        <p class="pie__titulo">Navegación</p>
+        <ul>
+          <li><a class="pie__enlace" href="index.html">Inicio</a></li>
+          <li><a class="pie__enlace" href="servicios.html" aria-current="page">Servicios</a></li>
+          <li><a class="pie__enlace" href="portafolio.html">Portafolio</a></li>
+          <li><a class="pie__enlace" href="nosotros.html">Nosotros</a></li>
+          <li><a class="pie__enlace" href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="pie__contacto">
+        <p class="pie__titulo">Contacto</p>
+        <ul>
+          <li><a class="pie__enlace" href="https://wa.me/573000000000" data-enlace="whatsapp"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> <span data-contacto="whatsappVisible">+57 300 000 0000</span></a></li>
+          <li><a class="pie__enlace" href="mailto:galaktionai@gmail.com" data-enlace="correo"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3.5 6l8.5 7 8.5-7"/></svg> <span data-contacto="correo">galaktionai@gmail.com</span></a></li>
+          <li><a class="pie__enlace" href="https://instagram.com/galaktion" data-enlace="instagram"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg> <span data-contacto="instagram">@galaktion</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__base contenedor">
+      <a href="https://galaktionai.com" data-enlace="dominio" data-contacto="dominio">galaktionai.com</a>
+      <p>© <span data-anio>2026</span> GALAKTION. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a class="whatsapp-flotante" href="https://wa.me/573000000000" data-enlace="whatsapp" aria-label="Escríbenos por WhatsApp">
+    <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg>
+  </a>
+
+  <!-- Librerías (GSAP + ScrollTrigger + SplitText + Lenis) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+
+  <!-- Scripts del sitio -->
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cargador.js" defer></script>
+  <script src="js/transiciones.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+  <script src="js/menu.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+</body>
+</html>

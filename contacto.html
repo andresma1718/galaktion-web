@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contacto — GALAKTION | Hablemos de tu proyecto</title>
+  <meta name="description" content="Cuéntanos tu proyecto y te respondemos el mismo día por WhatsApp. Sitios web premium y publicidad en Meta Ads.">
+  <link rel="canonical" href="https://galaktionai.com/contacto">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph: así se ve el enlace al compartirlo por WhatsApp, Facebook, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="GALAKTION">
+  <meta property="og:title" content="Contacto — GALAKTION | Hablemos de tu proyecto">
+  <meta property="og:description" content="Cuéntanos tu proyecto y te respondemos el mismo día por WhatsApp. Sitios web premium y publicidad en Meta Ads.">
+  <meta property="og:url" content="https://galaktionai.com/contacto">
+  <meta property="og:image" content="https://galaktionai.com/assets/og-galaktion.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GALAKTION — agencia digital premium">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Estado inicial antes de pintar: evita parpadeos del cargador y la cortina -->
+  <script>
+    (function (d) {
+      var h = d.documentElement; h.className += ' js';
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { h.className += ' movimiento-reducido'; return; }
+      try {
+        if (!sessionStorage.getItem('gk-visitado')) h.className += ' primera-visita';
+        else if (sessionStorage.getItem('gk-transicion')) h.className += ' con-transicion';
+      } catch (e) {}
+      // Seguro: si las animaciones no arrancan en 6 s (sin internet, etc.), se muestra todo
+      setTimeout(function () {
+        if (!/animaciones-listas/.test(h.className)) h.className = h.className.replace(/primera-visita|con-transicion/g, '') + ' sin-animacion';
+      }, 6000);
+    })(document);
+  </script>
+
+  <!-- Tipografías: Michroma (titulares) + Manrope (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Michroma&display=swap">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/fondos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/paginas.css">
+
+</head>
+<body class="pagina-contacto" data-pagina="contacto">
+
+  <!-- ===== Sprite SVG: G, logotipos, degradados metálicos y filtros ===== -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Acero plateado: de #f5f5f5 a #8a8a8a y de vuelta -->
+      <linearGradient id="gk-metal" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#f5f5f5"/>
+        <stop offset=".2" stop-color="#d2d2d2"/>
+        <stop offset=".36" stop-color="#8a8a8a"/>
+        <stop offset=".5" stop-color="#e8e8e8"/>
+        <stop offset=".6" stop-color="#f5f5f5"/>
+        <stop offset=".74" stop-color="#a4a4a4"/>
+        <stop offset=".88" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#d6d6d6"/>
+      </linearGradient>
+      <!-- Borde de bisel: luz arriba-izquierda, sombra abajo-derecha -->
+      <linearGradient id="gk-bisel" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".55" stop-color="#e8e8e8"/>
+        <stop offset="1" stop-color="#8a8a8a"/>
+      </linearGradient>
+      <!-- Metal para textos (vertical) -->
+      <linearGradient id="gk-metal-texto" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".45" stop-color="#e8e8e8"/>
+        <stop offset=".75" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#c0c0c0"/>
+      </linearGradient>
+      <!-- Destello de luz que recorre el metal -->
+      <linearGradient id="gk-destello" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <!-- Relieve (bisel con luz especular) + vetas de acero cepillado -->
+      <filter id="gk-relieve" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="desenfoque"/>
+        <feSpecularLighting in="desenfoque" surfaceScale="5" specularConstant=".85" specularExponent="24" lighting-color="#ffffff" result="luz">
+          <feDistantLight azimuth="225" elevation="42"/>
+        </feSpecularLighting>
+        <feComposite in="luz" in2="SourceAlpha" operator="in" result="luzDentro"/>
+        <feComposite in="SourceGraphic" in2="luzDentro" operator="arithmetic" k1="0" k2="1" k3=".6" k4="0" result="conLuz"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.42" numOctaves="2" seed="7" result="ruido"/>
+        <feColorMatrix in="ruido" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 .22" result="vetas"/>
+        <feComposite in="vetas" in2="SourceAlpha" operator="in" result="vetasDentro"/>
+        <feBlend in="vetasDentro" in2="conLuz" mode="soft-light"/>
+      </filter>
+    </defs>
+
+    <!-- G completa (una sola pieza) -->
+    <symbol id="gk-g" viewBox="-4 -4 428 568">
+      <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="4" stroke-linejoin="miter"/>
+    </symbol>
+
+    <!-- Logotipo horizontal (menú): G + GALAKTION -->
+    <symbol id="gk-logotipo-horizontal" viewBox="0 0 916 142">
+      <g transform="translate(1 1) scale(.25)">
+        <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="8" stroke-linejoin="miter"/>
+      </g>
+      <text class="logotipo__texto" x="152" y="92" font-size="60" textLength="760" lengthAdjust="spacing" fill="url(#gk-metal-texto)">GALAKTION</text>
+    </symbol>
+
+    <!-- Logotipo vertical (pie de página): G arriba, GALAKTION debajo, como la referencia -->
+    <symbol id="gk-logotipo-vertical" viewBox="0 -4 1560 712">
+      <g transform="translate(570 0)">
+        <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="4" stroke-linejoin="miter"/>
+      </g>
+      <text class="logotipo__texto" x="4" y="702" font-size="92" textLength="1550" lengthAdjust="spacing" fill="url(#gk-metal-texto)">GALAKTION</text>
+    </symbol>
+  </svg>
+
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===== Pantalla de carga (solo en la primera visita de la sesión) ===== -->
+  <div class="cargador" id="cargador" aria-hidden="true">
+    <svg class="cargador__g" viewBox="-4 -4 428 568">
+      <polygon class="cargador__trazo" points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" pathLength="1"/>
+      <polygon class="cargador__relleno" points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)"/>
+    </svg>
+    <div class="cargador__pie">
+      <span class="cargador__marca">GALAKTION</span>
+      <span class="cargador__contador"><span class="cargador__numero">0</span><span class="cargador__por">%</span></span>
+    </div>
+    <span class="cargador__barra"></span>
+  </div>
+
+  <!-- ===== Cortina de transición entre páginas ===== -->
+  <div class="cortina" id="cortina" aria-hidden="true">
+    <svg class="cortina__g"><use href="#gk-g"/></svg>
+  </div>
+
+  <!-- ===== Cursor personalizado (solo escritorio) ===== -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__aro"></span></div>
+  <div class="cursor-punto" aria-hidden="true"></div>
+
+  <!-- ===================== MENÚ SUPERIOR ===================== -->
+  <header class="cabecera" id="cabecera">
+    <a class="cabecera__logo" href="index.html" aria-label="Galaktion, ir al inicio">
+      <svg class="logotipo logotipo--horizontal" role="img" aria-hidden="true"><use href="#gk-logotipo-horizontal"/></svg>
+    </a>
+
+    <nav class="cabecera__nav" aria-label="Principal">
+      <ul>
+        <li><a class="cabecera__enlace" href="index.html">Inicio</a></li>
+        <li><a class="cabecera__enlace" href="servicios.html">Servicios</a></li>
+        <li><a class="cabecera__enlace" href="portafolio.html">Portafolio</a></li>
+        <li><a class="cabecera__enlace" href="nosotros.html">Nosotros</a></li>
+        <li><a class="cabecera__enlace" href="contacto.html" aria-current="page">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <a class="boton boton--contorno boton--chico cabecera__cta" href="contacto.html">Hablemos</a>
+
+    <button class="cabecera__hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Menú de pantalla completa para celular -->
+  <div class="menu-movil fondo-c" id="menu-movil" aria-hidden="true">
+    <nav class="menu-movil__nav" aria-label="Menú móvil">
+      <ul class="menu-movil__lista">
+        <li><span class="mascara"><a class="menu-movil__enlace" href="index.html"><span class="menu-movil__texto">Inicio</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="servicios.html"><span class="menu-movil__texto">Servicios</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="portafolio.html"><span class="menu-movil__texto">Portafolio</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="nosotros.html"><span class="menu-movil__texto">Nosotros</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="contacto.html" aria-current="page"><span class="menu-movil__texto">Contacto</span></a></span></li>
+      </ul>
+    </nav>
+    <div class="menu-movil__pie">
+      <a href="https://wa.me/573000000000" data-enlace="whatsapp">WhatsApp</a>
+      <a href="mailto:galaktionai@gmail.com" data-enlace="correo">Correo</a>
+      <a href="https://instagram.com/galaktion" data-enlace="instagram">Instagram</a>
+    </div>
+  </div>
+
+  <main id="contenido">
+
+    <section class="contacto fondo-c seccion" aria-labelledby="titulo-pagina">
+      <div class="contenedor contacto__contenedor">
+
+        <header class="contacto__cabeza">
+          <p class="etiqueta">Contacto</p>
+          <h1 class="titular titular--pagina" id="titulo-pagina" data-titular-cinetico>Hablemos de tu proyecto</h1>
+          <p class="encabezado-pagina__intro" data-texto="paginaContacto.intro">Cuéntanos qué necesitas. Al enviar, se abre WhatsApp con tu mensaje listo y te respondemos el mismo día.</p>
+        </header>
+
+        <!-- =========================================================
+             FORMULARIO → arma el mensaje y abre WhatsApp (js/formulario.js)
+             ========================================================= -->
+        <form class="formulario" id="form-contacto" novalidate>
+          <div class="campo">
+            <input class="campo__entrada" type="text" id="nombre" name="nombre" autocomplete="name" placeholder=" " required>
+            <label class="campo__etiqueta" for="nombre">Nombre</label>
+            <span class="campo__linea" aria-hidden="true"></span>
+          </div>
+
+          <div class="campo">
+            <input class="campo__entrada" type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder=" " pattern="[0-9 +\(\)\-]{7,}" required>
+            <label class="campo__etiqueta" for="whatsapp">WhatsApp</label>
+            <span class="campo__linea" aria-hidden="true"></span>
+          </div>
+
+          <div class="campo">
+            <input class="campo__entrada" type="text" id="negocio" name="negocio" placeholder=" " required>
+            <label class="campo__etiqueta" for="negocio">Tipo de negocio</label>
+            <span class="campo__linea" aria-hidden="true"></span>
+          </div>
+
+          <div class="campo campo--seleccion">
+            <select class="campo__entrada" id="servicio" name="servicio" required>
+              <option value="" disabled selected hidden></option>
+              <option>Diseño web premium</option>
+              <option>Publicidad en Meta Ads</option>
+              <option>Diseño web + Meta Ads</option>
+              <option>Automatización con IA (próximamente)</option>
+              <option>Aún no lo sé, quiero asesoría</option>
+            </select>
+            <label class="campo__etiqueta" for="servicio">Servicio de interés</label>
+            <span class="campo__linea" aria-hidden="true"></span>
+          </div>
+
+          <div class="campo campo--completo">
+            <textarea class="campo__entrada" id="mensaje" name="mensaje" rows="4" placeholder=" "></textarea>
+            <label class="campo__etiqueta" for="mensaje">Cuéntanos sobre tu proyecto (opcional)</label>
+            <span class="campo__linea" aria-hidden="true"></span>
+          </div>
+
+          <div class="formulario__acciones">
+            <button class="boton boton--primario boton--grande" type="submit"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> Enviar por WhatsApp</button>
+            <p class="formulario__aviso" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- =========================================================
+             CONTACTO DIRECTO
+             ========================================================= -->
+        <aside class="contacto__directo" aria-label="Contacto directo">
+          <p class="pie__titulo">O escríbenos directo</p>
+          <ul class="contacto__lista">
+            <li>
+              <a class="contacto__canal" href="https://wa.me/573000000000" data-enlace="whatsapp">
+                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg>
+                <span class="contacto__canal-nombre">WhatsApp</span>
+                <span class="contacto__canal-dato" data-contacto="whatsappVisible">+57 300 000 0000</span>
+              </a>
+            </li>
+            <li>
+              <a class="contacto__canal" href="mailto:galaktionai@gmail.com" data-enlace="correo">
+                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3.5 6l8.5 7 8.5-7"/></svg>
+                <span class="contacto__canal-nombre">Correo</span>
+                <span class="contacto__canal-dato" data-contacto="correo">galaktionai@gmail.com</span>
+              </a>
+            </li>
+            <li>
+              <a class="contacto__canal" href="https://instagram.com/galaktion" data-enlace="instagram">
+                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>
+                <span class="contacto__canal-nombre">Instagram</span>
+                <span class="contacto__canal-dato" data-contacto="instagram">@galaktion</span>
+              </a>
+            </li>
+          </ul>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="pie">
+    <div class="pie__contenedor contenedor">
+      <div class="pie__marca">
+        <a class="pie__logo" href="index.html" aria-label="Galaktion, ir al inicio">
+          <svg class="logotipo logotipo--vertical" aria-hidden="true"><use href="#gk-logotipo-vertical"/></svg>
+        </a>
+        <p class="pie__lema">Sitios web premium y publicidad que convierte. Hecho en Colombia.</p>
+      </div>
+
+      <nav class="pie__nav" aria-label="Pie de página">
+        <p class="pie__titulo">Navegación</p>
+        <ul>
+          <li><a class="pie__enlace" href="index.html">Inicio</a></li>
+          <li><a class="pie__enlace" href="servicios.html">Servicios</a></li>
+          <li><a class="pie__enlace" href="portafolio.html">Portafolio</a></li>
+          <li><a class="pie__enlace" href="nosotros.html">Nosotros</a></li>
+          <li><a class="pie__enlace" href="contacto.html" aria-current="page">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="pie__contacto">
+        <p class="pie__titulo">Contacto</p>
+        <ul>
+          <li><a class="pie__enlace" href="https://wa.me/573000000000" data-enlace="whatsapp"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> <span data-contacto="whatsappVisible">+57 300 000 0000</span></a></li>
+          <li><a class="pie__enlace" href="mailto:galaktionai@gmail.com" data-enlace="correo"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3.5 6l8.5 7 8.5-7"/></svg> <span data-contacto="correo">galaktionai@gmail.com</span></a></li>
+          <li><a class="pie__enlace" href="https://instagram.com/galaktion" data-enlace="instagram"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg> <span data-contacto="instagram">@galaktion</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__base contenedor">
+      <a href="https://galaktionai.com" data-enlace="dominio" data-contacto="dominio">galaktionai.com</a>
+      <p>© <span data-anio>2026</span> GALAKTION. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a class="whatsapp-flotante" href="https://wa.me/573000000000" data-enlace="whatsapp" aria-label="Escríbenos por WhatsApp">
+    <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg>
+  </a>
+
+  <!-- Librerías (GSAP + ScrollTrigger + SplitText + Lenis) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+
+  <!-- Scripts del sitio -->
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cargador.js" defer></script>
+  <script src="js/transiciones.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+  <script src="js/menu.js" defer></script>
+  <script src="js/formulario.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+</body>
+</html>

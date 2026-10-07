@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 1560 712" width="1560" height="712">
+  <!-- GALAKTION — logotipo vertical (G + palabra) -->
+  <style>@import url("https://fonts.googleapis.com/css2?family=Michroma&amp;display=swap"); .t{font-family:Michroma,Eurostile,sans-serif}</style>
+    <defs>
+      <!-- Acero plateado: de #f5f5f5 a #8a8a8a y de vuelta -->
+      <linearGradient id="gk-metal" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#f5f5f5"/>
+        <stop offset=".2" stop-color="#d2d2d2"/>
+        <stop offset=".36" stop-color="#8a8a8a"/>
+        <stop offset=".5" stop-color="#e8e8e8"/>
+        <stop offset=".6" stop-color="#f5f5f5"/>
+        <stop offset=".74" stop-color="#a4a4a4"/>
+        <stop offset=".88" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#d6d6d6"/>
+      </linearGradient>
+      <!-- Borde de bisel: luz arriba-izquierda, sombra abajo-derecha -->
+      <linearGradient id="gk-bisel" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".55" stop-color="#e8e8e8"/>
+        <stop offset="1" stop-color="#8a8a8a"/>
+      </linearGradient>
+      <!-- Metal para textos (vertical) -->
+      <linearGradient id="gk-metal-texto" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".45" stop-color="#e8e8e8"/>
+        <stop offset=".75" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#c0c0c0"/>
+      </linearGradient>
+      <!-- Destello de luz que recorre el metal -->
+      <linearGradient id="gk-destello" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <!-- Relieve (bisel con luz especular) + vetas de acero cepillado -->
+      <filter id="gk-relieve" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="desenfoque"/>
+        <feSpecularLighting in="desenfoque" surfaceScale="5" specularConstant=".85" specularExponent="24" lighting-color="#ffffff" result="luz">
+          <feDistantLight azimuth="225" elevation="42"/>
+        </feSpecularLighting>
+        <feComposite in="luz" in2="SourceAlpha" operator="in" result="luzDentro"/>
+        <feComposite in="SourceGraphic" in2="luzDentro" operator="arithmetic" k1="0" k2="1" k3=".6" k4="0" result="conLuz"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.42" numOctaves="2" seed="7" result="ruido"/>
+        <feColorMatrix in="ruido" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 .22" result="vetas"/>
+        <feComposite in="vetas" in2="SourceAlpha" operator="in" result="vetasDentro"/>
+        <feBlend in="vetasDentro" in2="conLuz" mode="soft-light"/>
+      </filter>
+    </defs>
+  <g transform="translate(570 0)"><polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="4" filter="url(#gk-relieve)"/></g>
+  <text class="t" x="4" y="702" font-size="92" textLength="1550" lengthAdjust="spacing" fill="url(#gk-metal-texto)">GALAKTION</text>
+</svg>
