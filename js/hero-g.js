@@ -136,7 +136,8 @@
     // Entrada inicial (no ligada al scroll): las piezas sueltas aparecen
     GK.listo.then(() => {
       gsap.to(cuerpos, { opacity: 1, duration: 1.4, stagger: { each: 0.12, from: 'random' }, ease: 'power2.out' });
-      if (indicador) gsap.fromTo(indicador, { opacity: 0 }, { opacity: 1, duration: 1, delay: 0.9 });
+      // Se anima el contenido del indicador (no el indicador, que lo controla el scroll)
+      if (indicador) gsap.fromTo(indicador.children, { opacity: 0 }, { opacity: 1, duration: 1, delay: 0.9 });
     });
   });
 })();

@@ -98,6 +98,7 @@
   padding: calc(var(--cabecera) + 6vh) var(--margen) calc(32px + env(safe-area-inset-bottom));
   visibility: hidden;
   clip-path: inset(0 0 100% 0);
+  background-color: var(--negro);
 }
 .menu-movil.esta-abierto { visibility: visible; clip-path: inset(0 0 0% 0); }
 .menu-movil__lista { display: grid; gap: 0.4rem; }
@@ -413,8 +414,8 @@
   position: relative;
   padding-top: clamp(72px, 9vw, 120px);
   border-top: 1px solid var(--grafito);
-  background: linear-gradient(180deg, #0d0d0d, var(--negro));
-}
+  background: linear-gradient(180deg, rgba(13, 13, 13, 0.55), rgba(10, 10, 10, 0.9));
+
 .pie__contenedor {
   display: grid;
   gap: 3rem;

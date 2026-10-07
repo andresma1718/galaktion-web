@@ -24,7 +24,8 @@ html.lenis, html.lenis body { height: auto; }
 html { background: var(--negro); }
 body {
   min-height: 100vh;
-  background: var(--negro);
+  /* Transparente: el negro lo pone <html>, así el fondo vivo (canvas) se ve detrás del contenido */
+  background: transparent;
   color: var(--plata);
   font-family: var(--fuente-texto);
   font-size: var(--texto-m);
