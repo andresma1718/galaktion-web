@@ -415,6 +415,7 @@
   padding-top: clamp(72px, 9vw, 120px);
   border-top: 1px solid var(--grafito);
   background: linear-gradient(180deg, rgba(13, 13, 13, 0.55), rgba(10, 10, 10, 0.9));
+}
 
 .pie__contenedor {
   display: grid;
@@ -486,3 +487,27 @@
 .valores .valor {
   background: linear-gradient(160deg, rgba(26, 26, 26, 0.5) 0%, rgba(20, 20, 20, 0.42) 50%, rgba(14, 14, 14, 0.55) 100%);
 }
+
+/* =========================================================================
+   ÍCONOS ANIMADOS DE LAS TARJETAS DE SERVICIOS (js/iconos.js)
+   Misma familia: línea fina plateada, puntos de luz, brillo sutil.
+   ========================================================================= */
+.icono-animado {
+  width: 96px;
+  height: 72px;
+  margin-block: 0.75rem 0.25rem;
+  color: var(--plata);
+  transition: color 0.5s, filter 0.5s;
+}
+.icono-animado__svg { width: 100%; height: 100%; overflow: visible; }
+.ia-lineas line { opacity: 0.35; transition: opacity 0.5s; }
+.ads-eje { opacity: 0.7; }
+.web-marco { opacity: 0.75; }
+/* Al pasar el mouse (o tocar), el ícono se enciende */
+.icono-animado--activo {
+  color: var(--plata-brillante);
+  filter: drop-shadow(0 0 4px rgba(232, 232, 232, 0.45));
+}
+.icono-animado--activo .ia-lineas line { opacity: 0.6; }
+.tarjeta--proximamente .icono-animado { opacity: 0.85; }
+@media (min-width: 1024px) { .icono-animado { width: 120px; height: 90px; } }

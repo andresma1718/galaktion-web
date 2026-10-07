@@ -368,7 +368,7 @@
   }
 
   /* -----------------------------------------------------------------------
-     Enlaces con #ancla desde otra página (ej. servicios.html#meta-ads)
+     Enlaces con #ancla desde otra página (ej. servicios.html#publicidad-ads)
      ----------------------------------------------------------------------- */
   function irAlAncla() {
     if (!location.hash) return;

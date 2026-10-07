@@ -35,7 +35,7 @@ window.GALAKTION = {
   mensajes: {
     general: 'Hola, vengo de la web de Galaktion y quiero información sobre una página web',
     cotizarWeb: 'Hola, vengo de la web de Galaktion y quiero cotizar un sitio web premium',
-    cotizarAds: 'Hola, vengo de la web de Galaktion y quiero cotizar publicidad en Meta Ads',
+    cotizarAds: 'Hola, vengo de la web de Galaktion y quiero cotizar publicidad y campañas Ads',
     cotizarIA: 'Hola, vengo de la web de Galaktion y quiero saber más sobre la automatización con IA',
     paqueteEsencial: 'Hola, vengo de la web de Galaktion y me interesa el paquete Esencial',
     paqueteProfesional: 'Hola, vengo de la web de Galaktion y me interesa el paquete Profesional',
@@ -83,7 +83,7 @@ window.GALAKTION = {
     premium: {
       nombre: 'Premium',
       precio: '$X',
-      descripcion: 'Sitio de alto nivel + campaña de Meta Ads lista para vender.',
+      descripcion: 'Sitio de alto nivel + campaña de publicidad lista para vender.',
     },
   },
 
