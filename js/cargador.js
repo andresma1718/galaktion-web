@@ -15,7 +15,7 @@
 
   const numero = el.querySelector('.cargador__numero');
   const contador = { valor: 0 };
-  const DURACION = 1.7;
+  const DURACION = 0.9;
 
   const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
 
@@ -33,7 +33,7 @@
       GK.fuentes.then(() => tl.resume());
     }, DURACION + 0.15)
     .add(() => GK.marcarListo(), '+=0.15')
-    .to(el, { yPercent: -100, duration: 1, ease: 'expo.inOut' }, '<')
+    .to(el, { yPercent: -100, duration: 0.7, ease: 'expo.inOut' }, '<')
     .to(el.querySelector('.cargador__g'), { y: -60, opacity: 0, duration: 0.6, ease: 'power2.in' }, '<')
     .add(() => {
       html.classList.remove('primera-visita');

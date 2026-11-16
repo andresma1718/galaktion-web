@@ -36,6 +36,11 @@ window.GALAKTION = {
     ciudad: 'Medellín, Colombia',
     // Cuando exista, escribe aquí el NIT o RUT, por ejemplo 'NIT 901.234.567-8'. Vacío = no se muestra.
     rut: '',
+    // Responsable legal del tratamiento de datos (Ley 1581). Completar ANTES de publicar.
+    responsable: '',      // nombre completo, por ejemplo 'Nombre Apellido Apellido, persona natural'
+    documento: '',        // por ejemplo 'C.C. 1.234.567.890'
+    direccion: '',        // dirección física en Medellín
+    telefono: '',         // teléfono de contacto
   },
 
   /* -----------------------------------------------------------------------

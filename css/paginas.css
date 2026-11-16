@@ -777,3 +777,13 @@ a.tarjeta:focus-visible { outline: 1px solid var(--plata-brillante); outline-off
   .compromiso:nth-child(4), .compromiso:nth-child(5) { grid-column: span 3; }
 }
 @media (min-width: 1024px) { .proceso__pasos--cinco .paso__titulo { font-size: clamp(0.82rem, 0.55rem + 0.5vw, 1.1rem); } }
+
+/* Ajustes tras la segunda revisión */
+.consentimiento__aviso { font-size: var(--texto-s); color: var(--plata); }
+@media (max-width: 767px) {
+  .encabezado-pagina { min-height: auto; padding-top: calc(var(--cabecera) + 72px); }
+  .valor { min-height: 0; }
+}
+@media (max-width: 1023px) { .encabezado-pagina { min-height: auto; padding-top: calc(var(--cabecera) + 72px); } }
+/* En celular, las tarjetas de principios son casi opacas para que las partículas no estorben la lectura */
+@media (max-width: 767px) { .valores .valor { background: rgba(16, 16, 16, 0.92); } }

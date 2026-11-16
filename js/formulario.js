@@ -45,6 +45,7 @@
       'Tipo de proyecto': tipo,
       Mensaje: texto('mensaje'),
       'Autorización Ley 1581': 'Sí, otorgada el ' + new Date().toLocaleString('es-CO'),
+      'Versión de la política aceptada': '2026-11-16',
       _subject: asunto + ' — ' + texto('empresa'),
       _replyto: texto('correo'),
       _template: 'table',

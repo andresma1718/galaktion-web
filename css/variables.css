@@ -35,7 +35,7 @@
   /* ---- Espaciado y medidas ---- */
   --margen: clamp(16px, 5vw, 64px);
   --ancho-max: 1320px;
-  --seccion: clamp(96px, 10vw + 48px, 200px);
+  --seccion: clamp(72px, 6vw + 40px, 136px);
   --cabecera: 72px;
   --radio: 2px;
 

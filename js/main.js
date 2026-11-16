@@ -70,6 +70,18 @@
     document.querySelectorAll('[data-empresa="rut-legal"]').forEach((el) => { el.textContent = ' Identificación: ' + emp.rut + '.'; el.hidden = false; });
   }
 
+  // Responsable legal en la política de datos: se muestra solo lo que esté escrito en config.js
+  const legal = {
+    responsable: emp.responsable,
+    documento: emp.documento && ', ' + emp.documento,
+    direccion: emp.direccion && ' Dirección: ' + emp.direccion + '.',
+    telefono: emp.telefono && ' Teléfono: ' + emp.telefono + '.',
+  };
+  Object.keys(legal).forEach((k) => {
+    if (!legal[k]) return;
+    document.querySelectorAll('[data-empresa="' + k + '"]').forEach((el) => { el.textContent = legal[k]; el.hidden = false; });
+  });
+
   // Año actual en el pie de página
   document.querySelectorAll('[data-anio]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
@@ -106,7 +118,7 @@
     // Lenis: scroll suave en escritorio; en celular se respeta el scroll nativo (más fluido)
     if (window.Lenis) {
       // lerp bajo = desplazamiento más suave y continuo (sin tirones ni frenazos)
-      lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9, touchMultiplier: 1, anchors: { offset: -80 } });
+      lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.95, touchMultiplier: 1, anchors: { offset: -80 } });
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((t) => lenis.raf(t * 1000));
       gsap.ticker.lagSmoothing(0);
