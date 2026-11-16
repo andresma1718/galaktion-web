@@ -1,8 +1,8 @@
 /* =========================================================================
-   GALAKTION — ARCHIVO DE CONFIGURACIÓN
+   GALAKTION AI — ARCHIVO DE CONFIGURACIÓN
    -------------------------------------------------------------------------
    Este es el ÚNICO archivo que necesitas tocar para cambiar datos de
-   contacto, mensajes de WhatsApp, textos clave, cifras y precios.
+   contacto, datos de la empresa y textos clave.
 
    Reglas para editar sin romper nada:
    - Cambia solo lo que está entre comillas '...'.
@@ -17,90 +17,68 @@ window.GALAKTION = {
      CONTACTO
      ----------------------------------------------------------------------- */
   contacto: {
-    // Número de WhatsApp SOLO con dígitos, con indicativo de país (57 = Colombia)
-    whatsapp: '573000000000',
-    // Cómo se ve el número escrito en la página
-    whatsappVisible: '+57 300 000 0000',
-    correo: 'galaktionai1@gmail.com',
+    // WhatsApp SOLO con dígitos y con indicativo (57 = Colombia), por ejemplo '573001234567'.
+    // Mientras esté vacío, todos los botones y enlaces de WhatsApp permanecen ocultos.
+    whatsapp: '',
+    // Cómo se ve el número escrito en la página, por ejemplo '+57 300 123 4567'
+    whatsappVisible: '',
+    correo: 'contacto@galaktionai.com',
     // Usuario de Instagram SIN la @
-    instagram: 'galaktion',
+    instagram: 'galaktion.ai',
     dominio: 'galaktionai.com',
-    ciudad: 'Colombia',
   },
 
   /* -----------------------------------------------------------------------
-     MENSAJES DE WHATSAPP
-     Cada botón de WhatsApp usa uno de estos mensajes ya escritos.
+     EMPRESA (pie de página y política de datos)
+     ----------------------------------------------------------------------- */
+  empresa: {
+    nombre: 'Galaktion AI',
+    ciudad: 'Medellín, Colombia',
+    // Cuando exista, escribe aquí el NIT o RUT, por ejemplo 'NIT 901.234.567-8'. Vacío = no se muestra.
+    rut: '',
+  },
+
+  /* -----------------------------------------------------------------------
+     FORMULARIO "SOLICITAR DIAGNÓSTICO"
+     Las solicitudes llegan a este correo (servicio FormSubmit, sin servidor propio).
+     Cuando se active contacto@galaktionai.com, se puede cambiar aquí.
+     ----------------------------------------------------------------------- */
+  formulario: {
+    destino: 'galaktionai1@gmail.com',
+    asunto: 'Nueva solicitud de diagnóstico — galaktionai.com',
+  },
+
+  /* -----------------------------------------------------------------------
+     MENSAJE DE WHATSAPP (cuando se configure el número)
      ----------------------------------------------------------------------- */
   mensajes: {
-    general: 'Hola, vengo de la web de Galaktion y quiero información sobre una página web',
-    cotizarWeb: 'Hola, vengo de la web de Galaktion y quiero cotizar un sitio web premium',
-    cotizarAds: 'Hola, vengo de la web de Galaktion y quiero cotizar publicidad y campañas Ads',
-    cotizarIA: 'Hola, vengo de la web de Galaktion y quiero saber más sobre la automatización con IA',
-    paqueteEsencial: 'Hola, vengo de la web de Galaktion y me interesa el paquete Esencial',
-    paqueteProfesional: 'Hola, vengo de la web de Galaktion y me interesa el paquete Profesional',
-    paquetePremium: 'Hola, vengo de la web de Galaktion y me interesa el paquete Premium',
+    general: 'Hola, vengo de galaktionai.com y quiero solicitar un diagnóstico.',
   },
 
   /* -----------------------------------------------------------------------
      TEXTOS CLAVE — INICIO
      ----------------------------------------------------------------------- */
   inicio: {
-    heroTitular: 'Construimos experiencias digitales que venden.',
-    heroSubtitulo: 'Sitios web premium, animados e interactivos, y publicidad que convierte.',
-    manifiesto: 'No hacemos páginas. Diseñamos la primera impresión de tu marca.',
-    ctaTitular: '¿Listo para que tu marca se vea como merece?',
-    ctaTexto: 'Cuéntanos tu idea por WhatsApp. Te respondemos el mismo día con una propuesta clara.',
-  },
-
-  /* -----------------------------------------------------------------------
-     CIFRAS / GARANTÍAS (sección de contadores del inicio)
-     numero: el valor al que llega el contador
-     antes / despues: texto que va pegado antes o después del número
-     ----------------------------------------------------------------------- */
-  cifras: [
-    { numero: '100', antes: '',   despues: '%',     etiqueta: 'A la medida. Cero plantillas.' },
-    { numero: '15',  antes: '7–', despues: ' días', etiqueta: 'Entrega de tu sitio' },
-    { numero: '100', antes: '',   despues: '%',     etiqueta: 'Optimizado para celular' },
-    { numero: '60',  antes: '',   despues: ' fps',  etiqueta: 'Animaciones fluidas' },
-  ],
-
-  /* -----------------------------------------------------------------------
-     PAQUETES (página Servicios)
-     Reemplaza '$X' por tu precio, por ejemplo: '$1.200.000'
-     ----------------------------------------------------------------------- */
-  paquetes: {
-    esencial: {
-      nombre: 'Esencial',
-      precio: '$X',
-      descripcion: 'Una landing page premium para vender un producto o servicio.',
-    },
-    profesional: {
-      nombre: 'Profesional',
-      precio: '$X',
-      descripcion: 'Sitio completo de varias páginas con animaciones a la medida.',
-    },
-    premium: {
-      nombre: 'Premium',
-      precio: '$X',
-      descripcion: 'Sitio de alto nivel + campaña de publicidad lista para vender.',
-    },
+    heroTitular: 'Ingeniería de software e inteligencia artificial para empresas.',
+    heroSubtitulo: 'Desarrollamos software a medida, automatizaciones con IA y plataformas web de alto nivel. Con alcance definido por escrito, código propiedad del cliente y soporte después del lanzamiento.',
+    ctaTitular: '¿Tiene un proyecto en mente?',
+    ctaTexto: 'Cuéntenos el contexto. Le respondemos en menos de 24 horas hábiles con los siguientes pasos.',
   },
 
   /* -----------------------------------------------------------------------
      NOSOTROS
      ----------------------------------------------------------------------- */
   nosotros: {
-    historia1: 'Galaktion nace en Colombia con una idea simple: los negocios que hacen las cosas bien merecen verse igual de bien en internet.',
-    historia2: 'Unimos diseño, tecnología e inteligencia artificial para construir sitios que se sienten premium desde el primer segundo, y campañas que convierten visitas en clientes.',
-    historia3: 'Trabajamos con pocos proyectos a la vez para cuidar cada detalle. Precisión de ingeniería, sensibilidad de diseño.',
-    fraseFinal: 'La precisión no es un detalle. Es nuestra firma.',
+    historia1: 'Galaktion AI es una firma de ingeniería de software con sede en Medellín. Diseñamos y construimos software a medida, automatizaciones con inteligencia artificial y plataformas web para empresas.',
+    historia2: 'Trabajamos con pocos proyectos a la vez para que cada uno tenga dirección técnica directa, desde el diagnóstico hasta el soporte.',
+    historia3: 'Nuestro criterio es simple: construir solo lo que resuelve un problema real del negocio, documentarlo bien y entregarlo bajo control del cliente.',
+    fraseFinal: 'La buena tecnología es la que su empresa puede usar, entender y hacer crecer.',
   },
 
   /* -----------------------------------------------------------------------
      CONTACTO (página)
      ----------------------------------------------------------------------- */
   paginaContacto: {
-    intro: 'Cuéntanos qué necesitas. Al enviar, se abre WhatsApp con tu mensaje listo y te respondemos el mismo día.',
+    intro: 'Cuéntenos sobre su empresa y el proyecto. Le respondemos en menos de 24 horas hábiles para agendar la llamada.',
   },
 };

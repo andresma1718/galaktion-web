@@ -518,3 +518,262 @@ textarea.campo__entrada:not(:placeholder-shown) ~ .campo__etiqueta,
 .contacto__cabeza .titular--pagina { font-size: clamp(1.6rem, 0.8rem + 3vw, 3.2rem); }
 /* Las palabras divididas en letras nunca se parten a la mitad */
 .dividido .palabra { display: inline-block; white-space: nowrap; }
+
+/* =========================================================================
+   VERSIÓN EMPRESARIAL (noviembre 2026)
+   Cursor nuevo, servicios en 4 tarjetas, diagnóstico, compromisos,
+   preguntas frecuentes, tecnologías, laboratorio, legales y ajustes
+   de todas las pantallas.
+   ========================================================================= */
+
+[hidden] { display: none !important; }
+
+/* ---- Cursor: un punto que sigue al mouse al instante; sobre tarjetas dice "Ver" ---- */
+@media (hover: hover) and (pointer: fine) {
+  .tiene-cursor .cursor { width: 0; height: 0; margin: 0; }
+  .cursor::before {
+    content: "";
+    position: absolute;
+    left: -5px; top: -5px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--plata-brillante);
+    mix-blend-mode: difference;
+    transition: transform 0.35s var(--ease-salida), background-color 0.3s;
+  }
+  .cursor--activo::before { transform: scale(2.6); }
+  .cursor--oprimido::before { transform: scale(0.7); }
+  .cursor--ver::before { transform: scale(7.2); mix-blend-mode: normal; background: var(--plata-brillante); }
+  .cursor__texto {
+    position: absolute; left: 0; top: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--negro);
+    transition: opacity 0.25s, transform 0.35s var(--ease-salida);
+    pointer-events: none;
+  }
+  .cursor--ver .cursor__texto { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ---- Cabecera: con 5 enlaces + botón, el menú completo aparece desde 1180 px ---- */
+.cabecera__nav ul { gap: clamp(1.1rem, 1.8vw, 2.5rem); }
+@media (min-width: 1024px) and (max-width: 1179px) {
+  .cabecera__nav, .cabecera .cabecera__cta { display: none; }
+  .cabecera__hamburguesa { display: grid; }
+  .menu-movil { display: flex; }
+}
+.menu-movil__cta { flex: 1 1 100%; margin-bottom: 0.5rem; }
+
+/* ---- Hero: el texto completo cabe en celulares pequeños ---- */
+@media (max-width: 767px) {
+  .hero { padding-bottom: 56px; }
+  .hero__g { height: clamp(96px, 15svh, 150px); }
+  .hero__subtitulo { font-size: var(--texto-m); }
+}
+.hero__subtitulo { max-width: 52ch; }
+
+/* ---- Textos de apoyo bajo los títulos de sección ---- */
+.encabezado-seccion__intro { margin-top: 1.25rem; color: var(--gris); font-size: var(--texto-l); max-width: 60ch; }
+
+/* ---- Tarjetas de servicio: la tarjeta completa es un enlace ---- */
+a.tarjeta { color: inherit; text-decoration: none; }
+a.tarjeta:focus-visible { outline: 1px solid var(--plata-brillante); outline-offset: 4px; }
+.tarjetas--cuatro { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .tarjetas--cuatro { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1280px) { .tarjetas--cuatro { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; } }
+.tarjetas--cuatro .tarjeta { min-height: 0; }
+.tarjetas--tres { grid-template-columns: 1fr; }
+@media (min-width: 900px) { .tarjetas--tres { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---- Diagnóstico gratuito ---- */
+.diagnostico__contenedor { display: grid; gap: clamp(48px, 6vw, 96px); }
+@media (min-width: 1024px) { .diagnostico__contenedor { grid-template-columns: 1.1fr 1fr; align-items: center; } }
+.diagnostico__texto { display: grid; gap: 1.25rem; justify-items: start; }
+.diagnostico__texto .etiqueta { margin-bottom: 0; }
+.diagnostico__intro { color: var(--plata); font-size: var(--texto-l); }
+.diagnostico__nota {
+  padding-left: 1rem;
+  border-left: 1px solid var(--plata);
+  color: var(--plata-brillante);
+  font-size: var(--texto-m);
+}
+.linea-tiempo { position: relative; display: grid; gap: 2.25rem; padding-left: 2rem; border-left: 1px solid var(--grafito); }
+.linea-tiempo__paso { position: relative; display: grid; gap: 0.35rem; }
+.linea-tiempo__paso::before {
+  content: "";
+  position: absolute; left: calc(-2rem - 6px); top: 0.3rem;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--negro); border: 1px solid var(--plata-brillante);
+  box-shadow: 0 0 14px rgba(232, 232, 232, 0.25);
+}
+.linea-tiempo__cuando { font-size: var(--texto-xs); font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gris); }
+.linea-tiempo__que { font-family: var(--fuente-titular); font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem); text-transform: uppercase; letter-spacing: 0.04em; color: var(--plata-brillante); }
+.linea-tiempo__detalle { color: var(--gris); font-size: var(--texto-s); }
+
+/* ---- Cifras: sin cortes en ninguna pantalla ---- */
+.cifras__lista { grid-template-columns: 1fr; }
+@media (min-width: 480px) { .cifras__lista { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1280px) { .cifras__lista { grid-template-columns: repeat(4, 1fr); } }
+.cifra__valor { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.6rem); }
+.cifra { min-width: 0; }
+
+/* ---- Cómo trabajamos: 5 fases con entregable ---- */
+@media (min-width: 1024px) { .proceso__pasos--cinco { grid-template-columns: repeat(5, 1fr); gap: 1.75rem; } }
+.paso__entregable {
+  margin-top: 0.4rem; padding-top: 0.7rem;
+  border-top: 1px solid var(--grafito);
+  font-size: var(--texto-xs); font-weight: 600; letter-spacing: 0.08em;
+  color: var(--plata);
+}
+
+/* ---- Nuestros compromisos ---- */
+.compromisos__lista { display: grid; gap: 1px; background: var(--grafito); border: 1px solid var(--grafito); }
+@media (min-width: 768px) { .compromisos__lista { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .compromisos__lista { grid-template-columns: repeat(3, 1fr); } }
+.compromiso {
+  position: relative;
+  display: grid; gap: 0.75rem; align-content: start;
+  padding: clamp(28px, 3vw, 40px);
+  padding-left: calc(clamp(28px, 3vw, 40px) + 30px);
+  background: rgba(14, 14, 14, 0.88);
+}
+.compromiso::before {
+  content: "";
+  position: absolute; left: clamp(28px, 3vw, 40px); top: calc(clamp(28px, 3vw, 40px) + 4px);
+  width: 14px; height: 7px;
+  border-left: 1.5px solid var(--plata-brillante); border-bottom: 1.5px solid var(--plata-brillante);
+  transform: rotate(-45deg);
+}
+.compromiso__titulo { font-family: var(--fuente-titular); font-size: clamp(0.9rem, 0.82rem + 0.35vw, 1.05rem); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.45; color: var(--plata-brillante); }
+.compromiso__texto { color: var(--gris); font-size: var(--texto-s); line-height: 1.7; }
+
+/* ---- Preguntas frecuentes ---- */
+.faq__lista { max-width: 920px; border-top: 1px solid var(--grafito); }
+.faq__item { border-bottom: 1px solid var(--grafito); }
+.faq__pregunta {
+  list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  padding: 1.5rem 0;
+  font-size: var(--texto-l); font-weight: 600;
+  color: var(--plata-brillante);
+  cursor: pointer;
+}
+.faq__pregunta::-webkit-details-marker { display: none; }
+.faq__pregunta::after {
+  content: "+";
+  flex-shrink: 0;
+  font-family: var(--fuente-texto); font-weight: 300; font-size: 1.6rem; line-height: 1;
+  color: var(--plata);
+  transition: transform 0.4s var(--ease-salida);
+}
+.faq__item[open] .faq__pregunta::after { transform: rotate(45deg); }
+.faq__respuesta { overflow: hidden; }
+.faq__respuesta p { padding-bottom: 1.5rem; color: var(--gris); max-width: 70ch; }
+
+/* ---- Tecnologías ---- */
+.tecnologias__grupos { display: grid; gap: 2.5rem 2rem; }
+@media (min-width: 640px) { .tecnologias__grupos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .tecnologias__grupos { grid-template-columns: repeat(3, 1fr); } }
+.tecnologias__titulo { margin-bottom: 1rem; font-size: var(--texto-xs); font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gris); }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li {
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--grafito); border-radius: 100px;
+  background: rgba(20, 20, 20, 0.6);
+  font-size: 0.8rem; color: var(--plata);
+}
+
+/* ---- Laboratorio ---- */
+.laboratorio__lista { display: grid; gap: 0; }
+.prototipo {
+  display: grid; gap: 2rem;
+  padding-block: clamp(40px, 6vw, 72px);
+  border-top: 1px solid var(--grafito);
+}
+.prototipo:last-child { border-bottom: 1px solid var(--grafito); }
+@media (min-width: 900px) { .prototipo { grid-template-columns: minmax(260px, 340px) 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; } }
+.prototipo__visual {
+  aspect-ratio: 16 / 11;
+  display: grid; place-items: center;
+  padding: 1.5rem;
+  border: 1px solid var(--grafito); border-radius: var(--radio);
+  background: radial-gradient(ellipse at 30% 0%, rgba(232, 232, 232, 0.06), transparent 60%), rgba(18, 18, 18, 0.8);
+  color: var(--plata);
+}
+.prototipo__visual svg { width: 100%; height: 100%; }
+.prototipo__acento { stroke: var(--plata-brillante); fill: rgba(232, 232, 232, 0.06); }
+.prototipo__cuerpo { display: grid; gap: 1.1rem; justify-items: start; }
+.prototipo__estado { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: var(--texto-xs); letter-spacing: 0.1em; color: var(--gris); }
+.prototipo__titulo { font-family: var(--fuente-titular); font-size: clamp(1.1rem, 0.9rem + 1vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.35; color: var(--plata-brillante); }
+.prototipo__datos { display: grid; gap: 0.35rem; }
+.prototipo__datos dt { margin-top: 0.6rem; font-size: var(--texto-xs); font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gris); }
+.prototipo__datos dd { color: var(--plata); max-width: 62ch; }
+
+/* ---- Páginas legales ---- */
+.encabezado-pagina--corto { min-height: 0; padding-top: calc(var(--cabecera) + 14vh); }
+.legal__contenido { max-width: 820px; }
+.legal__contenido h2 {
+  margin: 2.75rem 0 1rem;
+  font-family: var(--fuente-titular); font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem);
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--plata-brillante);
+}
+.legal__contenido h2:first-child { margin-top: 0; }
+.legal__contenido p, .legal__contenido li { color: var(--plata); line-height: 1.8; }
+.legal__contenido ul { list-style: disc; padding-left: 1.3rem; display: grid; gap: 0.5rem; margin-top: 0.75rem; }
+.legal__contenido a, .consentimiento a { color: var(--plata-brillante); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Contacto: lo que incluye el diagnóstico ---- */
+.contacto__incluye { margin-top: 1.75rem; }
+
+/* ---- Autorización de datos (Ley 1581) ---- */
+.consentimiento { display: grid; gap: 1rem; }
+.consentimiento__caja { position: relative; display: flex; align-items: flex-start; gap: 0.9rem; cursor: pointer; }
+.consentimiento__caja input { position: absolute; opacity: 0; width: 20px; height: 20px; margin: 0; }
+.consentimiento__marca {
+  flex-shrink: 0;
+  width: 20px; height: 20px; margin-top: 2px;
+  border: 1px solid var(--plata); border-radius: 2px;
+  display: grid; place-items: center;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+.consentimiento__marca::after {
+  content: "";
+  width: 9px; height: 5px; margin-top: -3px;
+  border-left: 2px solid var(--negro); border-bottom: 2px solid var(--negro);
+  transform: rotate(-45deg) scale(0);
+  transition: transform 0.25s var(--ease-salida);
+}
+.consentimiento__caja input:checked + .consentimiento__marca { background: var(--plata-brillante); border-color: var(--plata-brillante); }
+.consentimiento__caja input:checked + .consentimiento__marca::after { transform: rotate(-45deg) scale(1); }
+.consentimiento__caja input:focus-visible + .consentimiento__marca { outline: 1px solid var(--plata-brillante); outline-offset: 3px; }
+.consentimiento__texto { color: var(--plata); font-size: var(--texto-s); line-height: 1.65; }
+.consentimiento__aviso { color: var(--gris); font-size: var(--texto-xs); line-height: 1.7; letter-spacing: 0.02em; }
+.campo-oculto { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.formulario .campo--completo, .formulario .consentimiento, .formulario__acciones { grid-column: 1 / -1; }
+
+/* ---- Pie de página empresarial ---- */
+.pie__contenedor { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .pie__contenedor { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .pie__contenedor { grid-template-columns: 1.5fr 1fr 1.2fr 1fr; } }
+.pie__cta { margin-top: 1.5rem; }
+.pie__empresa { display: flex; flex-wrap: wrap; gap: 0 0.1rem; margin: 0; max-width: none; }
+.pie__empresa a { font-family: var(--fuente-texto); letter-spacing: 0.08em; }
+.pie__contacto .pie__enlace span { overflow-wrap: anywhere; }
+
+/* Titulares de página: palabras largas ("AUTOMATIZACIÓN,") caben en celulares pequeños */
+@media (max-width: 599px) { .titular--pagina { font-size: clamp(1.2rem, 0.35rem + 5vw, 1.7rem); } }
+
+/* Ajustes tras revisión en 1366 px */
+@media (min-width: 1280px) { .tarjetas--cuatro { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+@media (min-width: 1600px) {
+  .tarjetas--cuatro { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .tarjetas--cuatro .tarjeta__titulo { font-size: 0.95rem; }
+}
+.tarjeta__titulo, .compromiso__titulo, .paso__titulo, .prototipo__titulo { overflow-wrap: normal; hyphens: manual; }
+@media (min-width: 1100px) {
+  .compromisos__lista { grid-template-columns: repeat(6, 1fr); }
+  .compromiso { grid-column: span 2; }
+  .compromiso:nth-child(4), .compromiso:nth-child(5) { grid-column: span 3; }
+}
+@media (min-width: 1024px) { .proceso__pasos--cinco .paso__titulo { font-size: clamp(0.82rem, 0.55rem + 0.5vw, 1.1rem); } }

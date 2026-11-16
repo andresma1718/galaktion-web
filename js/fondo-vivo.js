@@ -121,7 +121,12 @@
             const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
             if (d2 < rm2) {
               objetivo = 1 - Math.sqrt(d2) / A.radioMouse;
-              if (mover) { p.x -= dx * 0.004 * objetivo; p.y -= dy * 0.004 * objetivo; }
+              if (mover) {
+                // Se acercan levemente al cursor, pero mantienen distancia: nunca se amontonan sobre el texto
+                const d = Math.sqrt(d2) || 1;
+                const f = d > 80 ? -0.0015 * objetivo : 0.02 * (1 - d / 80);
+                p.x += dx * f; p.y += dy * f;
+              }
             }
           }
           p.luz += (objetivo - p.luz) * 0.08;
@@ -380,7 +385,7 @@
         const base = ctx.createLinearGradient(0, horizonte, 0, H);
         base.addColorStop(0, 'rgba(192,192,192,0)');
         base.addColorStop(0.35, 'rgba(192,192,192,0.05)');
-        base.addColorStop(1, 'rgba(192,192,192,0.11)');
+        base.addColorStop(1, 'rgba(192,192,192,0.07)');
         ctx.lineWidth = 1;
         ctx.strokeStyle = base;
         ctx.stroke(ruta);
@@ -388,7 +393,7 @@
         // 2. La misma rejilla, iluminada alrededor de la luz
         const r = Math.max(W, H) * 0.22;
         const foco = ctx.createRadialGradient(luz.x, luz.y, 0, luz.x, luz.y, r);
-        foco.addColorStop(0, 'rgba(240,240,240,0.55)');
+        foco.addColorStop(0, 'rgba(240,240,240,0.42)');
         foco.addColorStop(0.4, 'rgba(220,220,220,0.18)');
         foco.addColorStop(1, 'rgba(220,220,220,0)');
         ctx.strokeStyle = foco;
@@ -522,6 +527,7 @@
      ======================================================================= */
   const ESCENAS = {
     inicio: escenaRed,
+    laboratorio: escenaRejilla,
     servicios: escenaCircuito,
     portafolio: escenaRejilla,
     nosotros: escenaParticulas,

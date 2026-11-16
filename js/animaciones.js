@@ -119,6 +119,13 @@
       '.pie__contenedor > *',
       '.contacto__directo',
       '.formulario > *',
+      '.diagnostico__texto > *',
+      '.linea-tiempo__paso',
+      '.compromiso',
+      '.faq__item',
+      '.tecnologias__grupo',
+      '.prototipo',
+      '.legal__contenido > *',
     ].join(',');
     // Los títulos de sección tienen su propia entrada (palabra por palabra)
     const elementos = $$(SELECTORES).filter((el) => !el.closest('.hero') && !el.closest('.encabezado-pagina') && !el.closest('.contacto__cabeza')
@@ -348,7 +355,7 @@
         });
         // Número gigante con parallax propio
         const numero = panel.querySelector('.servicio-panel__numero');
-        gsap.fromTo(numero, { xPercent: 30 }, {
+        if (numero) gsap.fromTo(numero, { xPercent: 30 }, {
           xPercent: -30, ease: 'none',
           scrollTrigger: { trigger: panel, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true },
         });

@@ -57,6 +57,19 @@
     else if (c[clave]) el.textContent = c[clave];
   });
 
+  // WhatsApp: todo lo marcado con WhatsApp se muestra solo si hay número configurado
+  if (c.whatsapp) {
+    document.querySelectorAll('[data-enlace="whatsapp"], [data-solo-whatsapp]').forEach((el) => { el.hidden = false; });
+  }
+
+  // Datos de la empresa: ciudad y RUT (el RUT aparece solo cuando se escribe en config.js)
+  const emp = CFG.empresa || {};
+  document.querySelectorAll('[data-empresa="ciudad"]').forEach((el) => { if (emp.ciudad) el.textContent = emp.ciudad; });
+  if (emp.rut) {
+    document.querySelectorAll('[data-empresa="rut"]').forEach((el) => { el.textContent = ' · ' + emp.rut; el.hidden = false; });
+    document.querySelectorAll('[data-empresa="rut-legal"]').forEach((el) => { el.textContent = ' Identificación: ' + emp.rut + '.'; el.hidden = false; });
+  }
+
   // Año actual en el pie de página
   document.querySelectorAll('[data-anio]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
@@ -92,7 +105,8 @@
 
     // Lenis: scroll suave en escritorio; en celular se respeta el scroll nativo (más fluido)
     if (window.Lenis) {
-      lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1, anchors: { offset: -80 } });
+      // lerp bajo = desplazamiento más suave y continuo (sin tirones ni frenazos)
+      lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9, touchMultiplier: 1, anchors: { offset: -80 } });
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((t) => lenis.raf(t * 1000));
       gsap.ticker.lagSmoothing(0);

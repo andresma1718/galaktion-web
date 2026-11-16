@@ -147,7 +147,49 @@
   /* ---------------------------------------------------------------------
      Arranque, pausa fuera de pantalla e intensidad al pasar el mouse
      --------------------------------------------------------------------- */
-  const FABRICAS = { web: iconoWeb, ads: iconoAds, ia: iconoIA };
+  /* ---------------------------------------------------------------------
+     DESARROLLO DE SOFTWARE — módulos que se dibujan y datos que fluyen
+     entre cliente, núcleo, servicio externo y base de datos
+     --------------------------------------------------------------------- */
+  function iconoSoftware(svg) {
+    const cajas = gsap.utils.toArray('.sw-cajas > *', svg);
+    const detalle = svg.querySelector('.sw-detalle');
+    const conectores = gsap.utils.toArray('.sw-conectores polyline', svg);
+    const capa = svg.querySelector('.sw-datos');
+    cajas.forEach(preparaTrazo);
+    conectores.forEach(preparaTrazo);
+    gsap.set(detalle, { opacity: 0 });
+
+    // Un punto de datos por conector que recorre sus tramos, ida y vuelta
+    const datos = conectores.map((c) => {
+      const pts = c.dataset.puntos.split(' ').map((p) => p.split(',').map(Number));
+      const punto = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      punto.setAttribute('r', '1.7');
+      punto.setAttribute('cx', pts[0][0]);
+      punto.setAttribute('cy', pts[0][1]);
+      punto.setAttribute('opacity', '0');
+      capa.appendChild(punto);
+      return { punto, pts };
+    });
+
+    const tl = gsap.timeline({ paused: true });
+    tl.to(cajas, { strokeDashoffset: 0, duration: 0.8, stagger: 0.12, ease: 'power2.inOut' })
+      .to(detalle, { opacity: 0.6, duration: 0.5 }, '-=0.2')
+      .to(conectores, { strokeDashoffset: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, '-=0.3');
+    // Bucle de datos (se repite sin redibujar las cajas)
+    const flujo = gsap.timeline({ repeat: -1, repeatDelay: 0.3 });
+    datos.forEach(({ punto, pts }, i) => {
+      const viaje = gsap.timeline().set(punto, { opacity: 1, attr: { cx: pts[0][0], cy: pts[0][1] } });
+      for (let k = 1; k < pts.length; k++) viaje.to(punto, { attr: { cx: pts[k][0], cy: pts[k][1] }, duration: 0.35, ease: 'none' });
+      for (let k = pts.length - 2; k >= 0; k--) viaje.to(punto, { attr: { cx: pts[k][0], cy: pts[k][1] }, duration: 0.35, ease: 'none' });
+      viaje.set(punto, { opacity: 0 });
+      flujo.add(viaje, i * 0.45);
+    });
+    tl.add(flujo);
+    return { tl };
+  }
+
+  const FABRICAS = { web: iconoWeb, ads: iconoAds, ia: iconoIA, software: iconoSoftware };
 
   iconos.forEach((caja) => {
     const svg = caja.querySelector('svg');

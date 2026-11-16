@@ -24,9 +24,10 @@
         gsap.set([cortina, g], { clearProps: 'all' });
       },
     })
-      .add(() => GK.marcarListo(), 0.15)
-      .to(g, { opacity: 0, scale: 0.94, duration: 0.25, ease: 'power2.in' }, 0)
-      .to(cortina, { yPercent: -100, duration: 0.48, ease: 'expo.inOut' }, 0.02);
+      // Pausa corta con la G visible; luego la cortina se retira con calma
+      .add(() => GK.marcarListo(), 0.45)
+      .to(g, { opacity: 0, scale: 0.94, duration: 0.4, ease: 'power2.inOut' }, 0.25)
+      .to(cortina, { yPercent: -100, duration: 0.85, ease: 'expo.inOut' }, 0.35);
   }
 
   // Destello que recorre el metal de la G (el degradado cruza en diagonal)
@@ -73,13 +74,14 @@
     try { sessionStorage.setItem('gk-transicion', '1'); } catch (err) { /* sin problema */ }
     if (GK.lenis) GK.lenis.stop();
 
-    // Salida (~0,45 s) + llegada (~0,55 s) = alrededor de 1 segundo en total
+    // Salida: la cortina sube, aparece la G, un destello la recorre y una breve pausa antes de cambiar
     gsap.timeline({ onComplete: () => { window.location.href = limpiar(url); } })
       .set(cortina, { visibility: 'visible', yPercent: 100 })
       .set(g, { opacity: 0, scale: 0.9 })
-      .to(cortina, { yPercent: 0, duration: 0.38, ease: 'expo.inOut' })
-      .to(g, { opacity: 1, scale: 1, duration: 0.2, ease: 'power2.out' }, '-=0.16')
-      .add(destello(0.26), '-=0.1');
+      .to(cortina, { yPercent: 0, duration: 0.7, ease: 'expo.inOut' })
+      .to(g, { opacity: 1, scale: 1, duration: 0.45, ease: 'power2.out' }, '-=0.3')
+      .add(destello(0.6), '-=0.15')
+      .to({}, { duration: 0.12 });
   });
 
   /* ---- Volver con el botón "atrás": la página sale de caché con la cortina puesta ---- */

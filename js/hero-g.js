@@ -76,9 +76,9 @@
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: () => '+=' + Math.round(window.innerHeight * (movil() ? 2.2 : 3)),
+        end: () => '+=' + Math.round(window.innerHeight * (movil() ? 2.1 : 2.7)),
         pin: true,
-        scrub: movil() ? 0.5 : 1,
+        scrub: movil() ? 0.9 : 1.4, // más inercia: el armado de la G se siente fluido, sin tirones
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => svg.classList.toggle('hero__g--completa', self.progress > 0.56),
