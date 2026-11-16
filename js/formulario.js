@@ -64,7 +64,7 @@
       const j = await r.json().catch(() => ({}));
       if (!r.ok || String(j.success) === 'false') throw new Error(j.message || 'error');
       form.reset();
-      aviso.textContent = 'Recibimos su solicitud. Le responderemos en menos de 24 horas hábiles.';
+      aviso.textContent = 'Recibimos su solicitud. Le responderemos en menos de un día hábil.';
     } catch (err) {
       // Respaldo: abrir el correo con la solicitud ya escrita
       const cuerpo = Object.keys(datos).filter((k) => k[0] !== '_').map((k) => k + ': ' + datos[k]).join('\n');

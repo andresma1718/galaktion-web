@@ -511,3 +511,9 @@
 .icono-animado--activo .ia-lineas line { opacity: 0.6; }
 .tarjeta--proximamente .icono-animado { opacity: 0.85; }
 @media (min-width: 1024px) { .icono-animado { width: 120px; height: 90px; } }
+
+/* La línea divisoria arranca donde arranca el contenido, también en pantallas muy anchas */
+.linea-seccion {
+  left: max(var(--margen), calc((100% - var(--ancho-max)) / 2));
+  right: max(var(--margen), calc((100% - var(--ancho-max)) / 2));
+}

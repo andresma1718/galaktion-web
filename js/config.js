@@ -65,9 +65,9 @@ window.GALAKTION = {
      ----------------------------------------------------------------------- */
   inicio: {
     heroTitular: 'Ingeniería de software e inteligencia artificial para empresas.',
-    heroSubtitulo: 'Desarrollamos software a medida, automatizaciones con IA y plataformas web de alto nivel. Con alcance definido por escrito, código propiedad del cliente y soporte después del lanzamiento.',
+    heroSubtitulo: 'Desarrollamos software a medida, automatizaciones con IA y plataformas web corporativas. Con alcance definido por escrito, código propiedad del cliente y soporte después del lanzamiento.',
     ctaTitular: '¿Tiene un proyecto en mente?',
-    ctaTexto: 'Cuéntenos el contexto. Le respondemos en menos de 24 horas hábiles con los siguientes pasos.',
+    ctaTexto: 'Cuéntenos el contexto. Le respondemos en menos de un día hábil con los siguientes pasos.',
   },
 
   /* -----------------------------------------------------------------------
@@ -84,6 +84,6 @@ window.GALAKTION = {
      CONTACTO (página)
      ----------------------------------------------------------------------- */
   paginaContacto: {
-    intro: 'Cuéntenos sobre su empresa y el proyecto. Le respondemos en menos de 24 horas hábiles para agendar la llamada.',
+    intro: 'Cuéntenos sobre su empresa y el proyecto. Le respondemos en menos de un día hábil para agendar la llamada.',
   },
 };
