@@ -17,7 +17,7 @@
 .hero__escena {
   position: relative;
   width: 100%;
-  max-width: 980px;
+  max-width: 1100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +54,7 @@
 }
 
 .hero__texto { margin-top: clamp(28px, 5svh, 52px); display: grid; justify-items: center; gap: 1.1rem; }
-.hero__titular { font-size: var(--titular-hero); max-width: 20em; line-height: 1.32; }
+.hero__titular { font-size: var(--titular-hero); max-width: 24em; line-height: 1.32; text-wrap: balance; }
 .hero__subtitulo { color: var(--gris); font-size: var(--texto-l); max-width: 36ch; }
 .hero__acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-top: 0.9rem; }
 @media (max-width: 479px) {

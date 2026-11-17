@@ -370,6 +370,7 @@
   color: var(--plata-brillante);
 }
 .tarjeta__texto, .valor__texto { color: var(--gris); font-size: var(--texto-s); line-height: 1.7; }
+.tarjeta__texto--nota { margin-top: -.4em; }
 .tarjeta__enlace {
   margin-top: auto;
   display: inline-flex; align-items: center; gap: 0.6rem;

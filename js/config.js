@@ -64,8 +64,8 @@ window.GALAKTION = {
      TEXTOS CLAVE — INICIO
      ----------------------------------------------------------------------- */
   inicio: {
-    heroTitular: 'Ingeniería de software e inteligencia artificial para empresas.',
-    heroSubtitulo: 'Desarrollamos software a medida, automatizaciones con IA y plataformas web corporativas. Con alcance definido por escrito, código propiedad del cliente y soporte después del lanzamiento.',
+    heroTitular: 'Desarrollo de software y\u00A0automatización con IA para\u00A0empresas.',
+    heroSubtitulo: 'Desarrollamos software a medida, automatizaciones con IA y plataformas web corporativas. Con alcance definido por escrito, código propiedad del cliente, soporte después del lanzamiento y estrategia digital para hacer crecer su empresa.',
     ctaTitular: '¿Tiene un proyecto en mente?',
     ctaTexto: 'Cuéntenos el contexto. Le respondemos en menos de un día hábil con los siguientes pasos.',
   },
@@ -74,7 +74,7 @@ window.GALAKTION = {
      NOSOTROS
      ----------------------------------------------------------------------- */
   nosotros: {
-    historia1: 'Galaktion AI es una firma de ingeniería de software con sede en Medellín. Diseñamos y construimos software a medida, automatizaciones con inteligencia artificial y plataformas web para empresas.',
+    historia1: 'Galaktion AI es una firma de tecnología con sede en Medellín. Diseñamos y construimos software a medida, automatizaciones con inteligencia artificial y plataformas web para empresas.',
     historia2: 'Trabajamos con pocos proyectos a la vez para que cada uno tenga dirección técnica directa, desde el diagnóstico hasta el soporte.',
     historia3: 'Nuestro criterio es simple: construir solo lo que resuelve un problema real del negocio, documentarlo bien y entregarlo bajo control del cliente.',
     fraseFinal: 'La buena tecnología es la que su empresa puede usar, entender y hacer crecer.',
