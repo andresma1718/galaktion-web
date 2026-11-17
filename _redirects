@@ -1,0 +1,4 @@
+# LABORATORIO OCULTO: la página existe pero redirige al inicio.
+# Para reactivarla: borrar estas dos líneas y quitar los comentarios "LABORATORIO OCULTO" del menú y el pie.
+/laboratorio       /  302
+/laboratorio.html  /  302
