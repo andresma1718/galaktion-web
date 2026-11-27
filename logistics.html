@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AI agents for logistics — Galaktion AI</title>
+  <meta name="description" content="Custom AI agents that read rate confirmations, BOLs and invoices, update your TMS, send status updates and alert dispatch.">
+  <link rel="canonical" href="https://galaktionai.com/logistics">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph: así se ve el enlace al compartirlo por WhatsApp, LinkedIn, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Galaktion AI">
+  <meta property="og:title" content="AI agents for logistics — Galaktion AI">
+  <meta property="og:description" content="Custom AI agents that read rate confirmations, BOLs and invoices, update your TMS, send status updates and alert dispatch.">
+  <meta property="og:url" content="https://galaktionai.com/logistics">
+  <meta property="og:image" content="https://galaktionai.com/assets/og-galaktion.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Galaktion AI — desarrollo de software, automatización e IA">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Estado inicial antes de pintar: evita parpadeos del cargador y la cortina -->
+  <script>
+    (function (d) {
+      var h = d.documentElement; h.className += ' js';
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { h.className += ' movimiento-reducido'; return; }
+      try {
+        if (!sessionStorage.getItem('gk-visitado')) h.className += ' primera-visita';
+        else if (sessionStorage.getItem('gk-transicion')) h.className += ' con-transicion';
+      } catch (e) {}
+      // Seguro: si las animaciones no arrancan en 6 s (sin internet, etc.), se muestra todo
+      setTimeout(function () {
+        if (!/animaciones-listas/.test(h.className)) h.className = h.className.replace(/primera-visita|con-transicion/g, '') + ' sin-animacion';
+      }, 6000);
+    })(document);
+  </script>
+
+  <!-- Tipografías: Michroma (titulares) + Manrope (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Michroma&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Michroma&display=swap">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/fondos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/paginas.css">
+</head>
+<body class="pagina-nicho" data-pagina="logistics">
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Acero plateado: de #f5f5f5 a #8a8a8a y de vuelta -->
+      <linearGradient id="gk-metal" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#f5f5f5"/>
+        <stop offset=".2" stop-color="#d2d2d2"/>
+        <stop offset=".36" stop-color="#8a8a8a"/>
+        <stop offset=".5" stop-color="#e8e8e8"/>
+        <stop offset=".6" stop-color="#f5f5f5"/>
+        <stop offset=".74" stop-color="#a4a4a4"/>
+        <stop offset=".88" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#d6d6d6"/>
+      </linearGradient>
+      <!-- Borde de bisel: luz arriba-izquierda, sombra abajo-derecha -->
+      <linearGradient id="gk-bisel" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".55" stop-color="#e8e8e8"/>
+        <stop offset="1" stop-color="#8a8a8a"/>
+      </linearGradient>
+      <!-- Metal para textos (vertical) -->
+      <linearGradient id="gk-metal-texto" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".45" stop-color="#e8e8e8"/>
+        <stop offset=".75" stop-color="#8a8a8a"/>
+        <stop offset="1" stop-color="#c0c0c0"/>
+      </linearGradient>
+      <!-- Destello de luz que recorre el metal -->
+      <linearGradient id="gk-destello" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <!-- Relieve (bisel con luz especular) + vetas de acero cepillado -->
+      <filter id="gk-relieve" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="desenfoque"/>
+        <feSpecularLighting in="desenfoque" surfaceScale="5" specularConstant=".85" specularExponent="24" lighting-color="#ffffff" result="luz">
+          <feDistantLight azimuth="225" elevation="42"/>
+        </feSpecularLighting>
+        <feComposite in="luz" in2="SourceAlpha" operator="in" result="luzDentro"/>
+        <feComposite in="SourceGraphic" in2="luzDentro" operator="arithmetic" k1="0" k2="1" k3=".6" k4="0" result="conLuz"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.42" numOctaves="2" seed="7" result="ruido"/>
+        <feColorMatrix in="ruido" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 .22" result="vetas"/>
+        <feComposite in="vetas" in2="SourceAlpha" operator="in" result="vetasDentro"/>
+        <feBlend in="vetasDentro" in2="conLuz" mode="soft-light"/>
+      </filter>
+    </defs>
+
+    <!-- G completa (una sola pieza) -->
+    <symbol id="gk-g" viewBox="-4 -4 428 568">
+      <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="4" stroke-linejoin="miter"/>
+    </symbol>
+
+    <!-- Logotipo horizontal (menú): G + GALAKTION -->
+    <symbol id="gk-logotipo-horizontal" viewBox="0 0 916 142">
+      <g transform="translate(1 1) scale(.25)">
+        <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="8" stroke-linejoin="miter"/>
+      </g>
+      <text class="logotipo__texto" x="152" y="92" font-size="60" textLength="760" lengthAdjust="spacing" fill="url(#gk-metal-texto)">GALAKTION</text>
+    </symbol>
+
+    <!-- Logotipo vertical (pie de página): G arriba, GALAKTION debajo, como la referencia -->
+    <symbol id="gk-logotipo-vertical" viewBox="0 -4 1560 712">
+      <g transform="translate(570 0)">
+        <polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)" stroke="url(#gk-bisel)" stroke-width="4" stroke-linejoin="miter"/>
+      </g>
+      <text class="logotipo__texto" x="4" y="702" font-size="92" textLength="1550" lengthAdjust="spacing" fill="url(#gk-metal-texto)">GALAKTION</text>
+    </symbol>
+  </svg>
+
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===== Pantalla de carga (solo en la primera visita de la sesión) ===== -->
+  <div class="cargador" id="cargador" aria-hidden="true">
+    <svg class="cargador__g" viewBox="-4 -4 428 568">
+      <polygon class="cargador__trazo" points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" pathLength="1"/>
+      <polygon class="cargador__relleno" points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-metal)"/>
+    </svg>
+    <div class="cargador__pie">
+      <span class="cargador__marca">GALAKTION</span>
+      <span class="cargador__contador"><span class="cargador__numero">0</span><span class="cargador__por">%</span></span>
+    </div>
+    <span class="cargador__barra"></span>
+  </div>
+
+  <!-- ===== Cortina de transición entre páginas ===== -->
+  <div class="cortina" id="cortina" aria-hidden="true">
+    <svg class="cortina__g" viewBox="-4 -4 428 568"><defs><linearGradient id="gk-destello-cortina" class="cortina__luz" gradientUnits="userSpaceOnUse" x1="-320" y1="0" x2="-160" y2="140"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><use href="#gk-g" x="-4" y="-4" width="428" height="568"/><polygon points="136,0 368,0 304,64 162.5,64 64,162.5 64,296.4 247.6,452.5 356,360.4 356,254 168,254 232,190 420,190 420,390 220,560 220,513 0,326 0,136" fill="url(#gk-destello-cortina)"/></svg>
+  </div>
+
+  <!-- ===== Cursor personalizado (solo con mouse) ===== -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__texto">Ver</span></div>
+
+  <!-- ===================== MENÚ SUPERIOR ===================== -->
+  <header class="cabecera" id="cabecera">
+    <a class="cabecera__logo" href="index.html" aria-label="Galaktion AI, ir al inicio">
+      <svg class="logotipo logotipo--horizontal" aria-hidden="true"><use href="#gk-logotipo-horizontal"/></svg>
+    </a>
+
+    <nav class="cabecera__nav" aria-label="Principal">
+      <ul>
+        <li><a class="cabecera__enlace" href="index.html">Inicio</a></li>
+        <li><a class="cabecera__enlace" href="servicios.html">Servicios</a></li>
+        <li><a class="cabecera__enlace" href="laboratorio.html">Laboratorio</a></li>
+        <li><a class="cabecera__enlace" href="nosotros.html">Nosotros</a></li>
+        <li><a class="cabecera__enlace" href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <a class="boton boton--contorno boton--chico cabecera__cta" href="contacto.html">Solicitar diagnóstico</a>
+
+    <button class="cabecera__hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Menú de pantalla completa para celular -->
+  <div class="menu-movil fondo-c" id="menu-movil" aria-hidden="true">
+    <nav class="menu-movil__nav" aria-label="Menú móvil">
+      <ul class="menu-movil__lista">
+        <li><span class="mascara"><a class="menu-movil__enlace" href="index.html"><span class="menu-movil__texto">Inicio</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="servicios.html"><span class="menu-movil__texto">Servicios</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="laboratorio.html"><span class="menu-movil__texto">Laboratorio</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="nosotros.html"><span class="menu-movil__texto">Nosotros</span></a></span></li>
+        <li><span class="mascara"><a class="menu-movil__enlace" href="contacto.html"><span class="menu-movil__texto">Contacto</span></a></span></li>
+      </ul>
+    </nav>
+    <div class="menu-movil__pie">
+      <a class="boton boton--primario menu-movil__cta" href="contacto.html">Solicitar diagnóstico</a>
+      <a href="mailto:contacto@galaktionai.com" data-enlace="correo">Correo</a>
+      <a href="https://instagram.com/galaktion.ai" data-enlace="instagram">Instagram</a>
+      <a href="#" data-enlace="whatsapp" hidden>WhatsApp</a>
+    </div>
+  </div>
+
+  <main id="contenido">
+
+    <section class="encabezado-pagina fondo-a" aria-labelledby="titulo-pagina">
+      <div class="contenedor">
+        <p class="etiqueta">Logistics</p>
+        <h1 class="titular titular--pagina" id="titulo-pagina" data-titular-cinetico>Your team stops typing. Starts moving freight.</h1>
+        <p class="encabezado-pagina__intro">Custom AI agents and automation for freight brokers, carriers and 3PLs. This is how it works.</p>
+      </div>
+    </section>
+
+    <section class="nicho-video fondo-b" aria-label="Video: how a Galaktion AI agent processes a load confirmation">
+      <div class="contenedor">
+        <div class="nicho-video__marco">
+          <video class="nicho-video__video" controls playsinline preload="metadata" poster="videos/logistics-poster.jpg">
+              <source src="videos/logistics-16x9.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="fondo-b seccion" aria-labelledby="titulo-bloques">
+      <div class="contenedor">
+        <p class="etiqueta">What we automate</p>
+        <h2 class="titular titular--seccion" id="titulo-bloques">From inbox to TMS, without retyping.</h2>
+        <div class="tarjetas nicho-bloques">
+          <article class="tarjeta">
+            <span class="tarjeta__numero">01</span>
+            <h3 class="tarjeta__titulo">Document intake</h3>
+            <p class="tarjeta__texto">The agent reads rate confirmations, BOLs and invoices as they arrive by email and extracts load number, origin, destination, rate and dates.</p>
+          </article>
+          <article class="tarjeta">
+            <span class="tarjeta__numero">02</span>
+            <h3 class="tarjeta__titulo">TMS and spreadsheet updates</h3>
+            <p class="tarjeta__texto">Extracted data goes straight into your TMS or the sheets your team already uses, so nobody copies fields by hand.</p>
+          </article>
+          <article class="tarjeta">
+            <span class="tarjeta__numero">03</span>
+            <h3 class="tarjeta__titulo">Customer and dispatch updates</h3>
+            <p class="tarjeta__texto">The agent sends status updates to the customer and notifies the dispatcher when a load is ready to assign. Exceptions go to a person.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta fondo-c seccion" aria-labelledby="titulo-cta">
+      <div class="contenedor cta__contenedor">
+        <p class="etiqueta">Next step</p>
+        <h2 class="titular titular--grande" id="titulo-cta">See it with your own documents.</h2>
+        <p class="cta__texto">In a diagnostic call we map your current workflow and tell you what can be automated, with timeline and investment.</p>
+        <a class="boton boton--primario boton--grande" href="contacto.html" data-enlace="calcom">Book a diagnostic call <svg class="icono icono--flecha" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="pie">
+    <div class="pie__contenedor contenedor">
+      <div class="pie__marca">
+        <a class="pie__logo" href="index.html" aria-label="Galaktion AI, ir al inicio">
+          <svg class="logotipo logotipo--vertical" aria-hidden="true"><use href="#gk-logotipo-vertical"/></svg>
+        </a>
+        <p class="pie__lema">Desarrollo de software, automatización e inteligencia artificial para empresas.</p>
+        <a class="boton boton--contorno boton--chico pie__cta" href="contacto.html">Solicitar diagnóstico</a>
+      </div>
+
+      <nav class="pie__nav" aria-label="Pie de página">
+        <p class="pie__titulo">Navegación</p>
+        <ul>
+          <li><a class="pie__enlace" href="index.html">Inicio</a></li>
+          <li><a class="pie__enlace" href="servicios.html">Servicios</a></li>
+          <li><a class="pie__enlace" href="laboratorio.html">Laboratorio</a></li>
+          <li><a class="pie__enlace" href="nosotros.html">Nosotros</a></li>
+          <li><a class="pie__enlace" href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="pie__contacto">
+        <p class="pie__titulo">Contacto</p>
+        <ul>
+          <li><a class="pie__enlace" href="mailto:contacto@galaktionai.com" data-enlace="correo"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3.5 6l8.5 7 8.5-7"/></svg> <span data-contacto="correo">contacto@galaktionai.com</span></a></li>
+          <li><a class="pie__enlace" href="https://instagram.com/galaktion.ai" data-enlace="instagram"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg> <span data-contacto="instagram">@galaktion.ai</span></a></li>
+          <li hidden data-solo-whatsapp><a class="pie__enlace" href="#" data-enlace="whatsapp"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg> <span data-contacto="whatsappVisible">WhatsApp</span></a></li>
+        </ul>
+      </div>
+
+      <div class="pie__legal">
+        <p class="pie__titulo">Legal</p>
+        <ul>
+          <li><a class="pie__enlace" href="politica-de-datos.html">Política de tratamiento de datos</a></li>
+          <li><a class="pie__enlace" href="terminos.html">Términos y condiciones</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__base contenedor">
+      <p class="pie__empresa">
+        <span>Galaktion AI</span><span aria-hidden="true"> · </span><span data-empresa="ciudad">Medellín, Colombia</span><span aria-hidden="true"> · </span><a href="mailto:contacto@galaktionai.com" data-enlace="correo" data-contacto="correo">contacto@galaktionai.com</a>
+        <!-- Espacio para el RUT: se muestra solo cuando se escribe en js/config.js → empresa.rut -->
+        <span class="pie__rut" data-empresa="rut" hidden></span>
+      </p>
+      <p>© <span data-anio>2026</span> Galaktion AI. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp (oculto hasta configurar el número en js/config.js) -->
+  <a class="whatsapp-flotante" href="#" data-enlace="whatsapp" aria-label="Escríbanos por WhatsApp" hidden>
+    <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.2c-.4 0-.9.4-.9 1.2 0 2.9 3.4 6.4 6.5 6.4.8 0 1.3-.5 1.3-.9l-.1-.9-1.8-.8-.9.9c-1.1-.4-2.4-1.6-2.9-2.8l.8-.9-.7-1.9-1.3-.3z"/></svg>
+  </a>
+
+  <!-- Librerías (GSAP + ScrollTrigger + SplitText + Lenis) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+
+  <!-- Scripts del sitio -->
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cargador.js" defer></script>
+  <script src="js/transiciones.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+  <script src="js/menu.js" defer></script>
+  <script src="js/animaciones.js" defer></script>
+  <script src="js/fondo-vivo.js" defer></script>
+</body>
+</html>
