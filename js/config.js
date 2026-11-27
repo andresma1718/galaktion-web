@@ -25,6 +25,11 @@ window.GALAKTION = {
     correo: 'contacto@galaktionai.com',
     // Usuario de Instagram SIN la @
     instagram: 'galaktion.ai',
+    // Enlaces de reservas de Cal.com para el botón de diagnóstico.
+    // calcomEn = páginas en inglés (/logistics); calcomEs = páginas en español (/inmobiliarias).
+    // Vacío = el botón lleva a contacto.html.
+    calcomEn: 'https://cal.com/andres-marin-hrw4et/diagnostic-call',
+    calcomEs: 'https://cal.com/andres-marin-hrw4et/diagnostico',
     dominio: 'galaktionai.com',
   },
 

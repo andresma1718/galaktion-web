@@ -46,6 +46,10 @@
       case 'correo': if (c.correo) el.href = 'mailto:' + c.correo; break;
       case 'instagram': if (c.instagram) el.href = 'https://instagram.com/' + c.instagram; break;
       case 'dominio': if (c.dominio) el.href = 'https://' + c.dominio; break;
+      case 'calcom': { // inglés o español según el idioma de la página; sin enlace se queda en contacto.html
+        const cal = /^en/i.test(document.documentElement.lang) ? c.calcomEn : c.calcomEs;
+        if (!cal) return; el.href = cal; break;
+      }
     }
     if (el.dataset.enlace !== 'correo') { el.target = '_blank'; el.rel = 'noopener'; }
   });
